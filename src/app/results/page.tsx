@@ -156,7 +156,6 @@ export default function ResultsDashboard() {
   };
 
   return (
-  return (
     <div className="w-full bg-[#f8fafc] min-h-screen flex flex-col">
       {/* Official Header Section */}
       <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
