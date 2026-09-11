@@ -1,4 +1,4 @@
-# VerifiVote - Frontend
+# Pak e-Voting - Frontend
 
 AI-Driven Decentralized Voting Platform Frontend built with Next.js (App Router), Wagmi, RainbowKit, Viem, and Tailwind CSS.
 
