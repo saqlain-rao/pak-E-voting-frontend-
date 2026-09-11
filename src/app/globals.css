@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +7,54 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* NADRA Inspired Palette */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary-green: #004d28;
+  --primary-green-light: #115740;
+  --accent-gold: #d4af37;
+  --accent-gold-light: #f5d76e;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base Official Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-green);
+}
+
+.bg-nadra-green {
+  background-color: var(--primary-green);
+}
+
+.text-nadra-green {
+  color: var(--primary-green);
+}
+
+.border-nadra-green {
+  border-color: var(--primary-green);
+}
+
+.bg-nadra-gold {
+  background-color: var(--accent-gold);
+}
+
+.text-nadra-gold {
+  color: var(--accent-gold);
+}
+
+/* Glassmorphism for official cards */
+.official-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 77, 40, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border-radius: 0.75rem;
 }

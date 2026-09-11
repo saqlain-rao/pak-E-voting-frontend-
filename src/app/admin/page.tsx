@@ -8,9 +8,6 @@ import { jwtDecode } from 'jwt-decode';
 import toast from 'react-hot-toast';
 import api from '../../lib/api';
 import { useRouter } from 'next/navigation';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
-import { useMemo } from 'react';
 
 const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as `0x${string}`;
 const BACKEND_VERIFIER = process.env.NEXT_PUBLIC_BACKEND_VERIFIER as `0x${string}`;
@@ -52,48 +49,6 @@ const ELECTION_ABI = [
     }
 ];
 
-function DataParticles() {
-  const points = useMemo(() => {
-    const pts = [];
-    for (let i = 0; i < 40; i++) {
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 6 + Math.random() * 4;
-      pts.push([
-        r * Math.sin(phi) * Math.cos(theta),
-        r * Math.sin(phi) * Math.sin(theta),
-        r * Math.cos(phi)
-      ]);
-    }
-    return pts;
-  }, []);
-
-  return (
-    <group>
-      {points.map((pos: any, i) => (
-        <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.02, 8, 8]} />
-          <meshBasicMaterial color="#22c55e" />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-const Background = () => (
-  <div className="fixed inset-0 w-full h-screen -z-10 pointer-events-none">
-    <Canvas camera={{ position: [0, 2, 12], fov: 50 }}>
-      <color attach="background" args={['#04170E']} />
-      <ambientLight intensity={0.5} color="#ffffff" />
-      <directionalLight position={[10, 20, 10]} intensity={2.0} color="#ffffff" />
-      <pointLight position={[-10, -10, -10]} intensity={5.0} color="#22c55e" />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-      <DataParticles />
-      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-    </Canvas>
-  </div>
-);
-
 const getLocalISOString = () => {
   const tzoffset = (new Date()).getTimezoneOffset() * 60000;
   return (new Date(Date.now() - tzoffset)).toISOString().slice(0, 16);
@@ -124,7 +79,7 @@ export default function AdminDashboard() {
     if (token) {
       try {
         const decoded: any = jwtDecode(token);
-        if (decoded.role === 'Admin' || (address && address.toLowerCase() === '0x8f71bcd375fc18c49ad36dffeaacc016c49778b9'.toLowerCase())) {
+        if (decoded.role === 'Admin' || (address && address.toLowerCase() === '0x449F48A20CF8c3E9B738D9c88942a3E6bCe1aA95'.toLowerCase())) {
           setIsAdmin(true);
           setIsAuthenticated(true);
           fetchElections();
@@ -163,7 +118,7 @@ export default function AdminDashboard() {
         localStorage.setItem('auth_token', verifyRes.data.access_token);
         
         const decoded: any = jwtDecode(verifyRes.data.access_token);
-        if (decoded.role === 'Admin' || targetAddress.toLowerCase() === '0x8f71bcd375fc18c49ad36dffeaacc016c49778b9'.toLowerCase()) {
+        if (decoded.role === 'Admin' || targetAddress.toLowerCase() === '0x449F48A20CF8c3E9B738D9c88942a3E6bCe1aA95'.toLowerCase()) {
           setIsAdmin(true);
           setIsAuthenticated(true);
           fetchElections();
@@ -287,8 +242,9 @@ export default function AdminDashboard() {
   const issueTokenAndApprove = async (walletAddress: string, role: string, isNadra = false) => {
     try {
         if (!isConnected || !address) {
-            toast.error('Admin Wallet not connected.');
-            return;
+            toast.error('Admin Wallet not connected. Reconnecting...');
+            const result = await connectAsync({ connector: injected() });
+            if (!result.accounts[0]) return;
         }
 
         // Must find the active or latest election to issue token on
@@ -332,15 +288,27 @@ export default function AdminDashboard() {
 
   if (!isAdmin) {
     return (
-      <div className="w-full bg-transparent min-h-screen flex items-center justify-center">
-        <Background />
-        <div className="bg-black/40 backdrop-blur-xl border border-green-500/20 rounded-2xl p-8 max-w-md w-full text-center">
-          <h1 className="text-2xl font-bold text-white mb-4">Admin Access Required</h1>
-          <p className="text-green-200 mb-6">Please authenticate with the admin wallet to proceed.</p>
+      <div className="w-full bg-slate-50 min-h-screen flex items-center justify-center p-6 flex-col">
+        {/* Official Header Section */}
+        <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37] absolute top-0 left-0">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+          <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-md">
+              Admin Access Required
+            </h1>
+            <p className="text-lg text-green-50/90 font-light">
+              Secure Government Portal Area
+            </p>
+          </div>
+        </div>
+        <div className="bg-white border-t-4 border-[#004D28] rounded-xl p-8 max-w-md w-full text-center shadow-lg mt-32 z-10">
+          <div className="text-5xl mb-4">🔐</div>
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">Restricted Area</h1>
+          <p className="text-slate-600 mb-6 font-medium">Please authenticate with your official administrator credentials to proceed.</p>
           <button 
             onClick={handleContextualLogin}
             disabled={isProcessingLogin}
-            className="w-full py-3 bg-[#115740] hover:bg-[#0D402F] text-white font-bold rounded-xl transition-all disabled:opacity-50"
+            className="w-full py-4 bg-[#004D28] hover:bg-[#00381d] text-white font-bold rounded-xl shadow-md transition-all disabled:opacity-50"
           >
             {isProcessingLogin ? 'Authenticating...' : 'Connect Admin Wallet'}
           </button>
@@ -350,187 +318,201 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="w-full bg-transparent min-h-screen">
-      <Background />
-      <div className="max-w-7xl mx-auto p-6 py-12 relative z-10 grid md:grid-cols-3 gap-8">
-        
-        {/* Left Col: Forms */}
-        <div className="md:col-span-1 space-y-8">
-          <div className="bg-black/40 backdrop-blur-xl border border-green-500/20 rounded-2xl p-6 shadow-xl">
-            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span className="text-green-400">?</span> Draft New Election
-            </h2>
-            <form onSubmit={handleCreateElection} className="flex flex-col gap-4">
-              <input 
-                required
-                type="text" 
-                placeholder="Election Title" 
-                className="w-full bg-black/60 border border-green-500/30 rounded-lg p-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
-                value={electionForm.title} onChange={e => setElectionForm({...electionForm, title: e.target.value})}
-              />
-              <textarea 
-                placeholder="Description" 
-                className="w-full bg-black/60 border border-green-500/30 rounded-lg p-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 h-24"
-                value={electionForm.description} onChange={e => setElectionForm({...electionForm, description: e.target.value})}
-              />
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-green-300/70 mb-1 block">Start Time</label>
-                  <input 
-                    required type="datetime-local" 
-                    className="w-full bg-black/60 border border-green-500/30 rounded-lg p-3 text-green-100 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
-                    value={electionForm.startTime} onChange={e => setElectionForm({...electionForm, startTime: e.target.value})}
-                  />
-                </div>
-                <div>
-                  <label className="text-xs text-green-300/70 mb-1 block">Duration (Minutes)</label>
-                  <input 
-                    required type="number" min="1"
-                    className="w-full bg-black/60 border border-green-500/30 rounded-lg p-3 text-white focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
-                    value={electionForm.durationMinutes} onChange={e => setElectionForm({...electionForm, durationMinutes: Number(e.target.value)})}
-                  />
-                </div>
-              </div>
-              <button type="submit" className="mt-4 w-full py-3 bg-[#115740] hover:bg-[#0D402F] text-white font-bold rounded-lg transition-colors">
-                Save Draft Off-Chain
-              </button>
-            </form>
-          </div>
-
-          <div className="bg-black/40 backdrop-blur-xl border border-blue-500/20 rounded-2xl p-6 shadow-xl">
-            <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-              <span className="text-blue-400">???</span> NADRA Auth
-            </h2>
-            <p className="text-xs text-blue-200/70 mb-4">Add a voter manually to bypass KYC and auto-issue EVT token.</p>
-            <div className="flex flex-col gap-4">
-              <input 
-                type="text" 
-                placeholder="0x..." 
-                className="w-full bg-black/60 border border-blue-500/30 rounded-lg p-3 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                value={nadraWallet} onChange={e => setNadraWallet(e.target.value)}
-              />
-              <button 
-                onClick={() => issueTokenAndApprove(nadraWallet, 'Voter', true)}
-                disabled={!nadraWallet || isPending}
-                className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold rounded-lg transition-colors"
-              >
-                Approve & Issue Token
-              </button>
-            </div>
-          </div>
+    <div className="w-full bg-slate-50 min-h-screen flex flex-col">
+      {/* Official Header Section */}
+      <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37]">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-2 drop-shadow-md">
+            Central Command Dashboard
+          </h1>
+          <p className="text-lg text-green-50/90 font-light">
+            Manage Elections, Verify Identities, and Monitor Blockchain Operations.
+          </p>
         </div>
+      </div>
 
-        {/* Right Col: Lists */}
-        <div className="md:col-span-2 space-y-8">
-            
-          {/* Pending KYC Table */}
-          <div className="bg-black/40 backdrop-blur-xl border border-orange-500/20 rounded-2xl p-6 shadow-xl">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <span className="text-orange-400">?</span> Pending KYC Requests
+      <div className="flex-1 max-w-7xl w-full mx-auto p-6 relative z-10 -mt-8 pb-20">
+        <div className="grid md:grid-cols-3 gap-8">
+          
+          {/* Left Col: Forms */}
+          <div className="md:col-span-1 space-y-8">
+            <div className="bg-white border-t-4 border-[#004D28] rounded-xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2 border-b border-gray-100 pb-2">
+                <span className="text-[#004D28]">📝</span> Draft New Election
               </h2>
-              <button onClick={fetchPendingKyc} className="p-2 hover:bg-orange-500/20 rounded-full text-orange-300 transition-colors" title="Refresh">
-                ??
-              </button>
+              <form onSubmit={handleCreateElection} className="flex flex-col gap-4">
+                <input 
+                  required
+                  type="text" 
+                  placeholder="Election Title" 
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28]"
+                  value={electionForm.title} onChange={e => setElectionForm({...electionForm, title: e.target.value})}
+                />
+                <textarea 
+                  placeholder="Description" 
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28] h-24 resize-none"
+                  value={electionForm.description} onChange={e => setElectionForm({...electionForm, description: e.target.value})}
+                />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-bold text-slate-500 mb-1 block uppercase">Start Time</label>
+                    <input 
+                      required type="datetime-local" 
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28]"
+                      value={electionForm.startTime} onChange={e => setElectionForm({...electionForm, startTime: e.target.value})}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-bold text-slate-500 mb-1 block uppercase">Duration (Min)</label>
+                    <input 
+                      required type="number" min="1"
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28]"
+                      value={electionForm.durationMinutes} onChange={e => setElectionForm({...electionForm, durationMinutes: Number(e.target.value)})}
+                    />
+                  </div>
+                </div>
+                <button type="submit" className="mt-2 w-full py-3 bg-[#004D28] hover:bg-[#00381d] text-white font-bold rounded-xl shadow-md transition-colors">
+                  Save Draft Off-Chain
+                </button>
+              </form>
             </div>
-            
-            <div className="space-y-4 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
-                {[...pendingVoters, ...pendingCandidates].map(user => (
-                    <div key={user.walletAddress} className="bg-black/60 border border-orange-500/30 rounded-xl p-4 flex justify-between items-center">
-                        <div>
-                            <div className="flex gap-2 items-center">
-                                <h3 className="font-semibold text-white">{user.name}</h3>
-                                <span className="text-[10px] px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 uppercase">{user.role}</span>
-                            </div>
-                            <p className="text-xs text-orange-200/60 mt-1">{user.walletAddress}</p>
-                            <p className="text-xs text-orange-200/60 mt-1">CNIC: {user.cnic} | Age: {user.age}</p>
-                        </div>
-                        <button 
-                            onClick={() => issueTokenAndApprove(user.walletAddress, user.role, false)}
-                            disabled={isPending}
-                            className="px-4 py-2 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white text-sm font-bold rounded-lg transition-colors"
-                        >
-                            Approve
-                        </button>
-                    </div>
-                ))}
-                {pendingVoters.length === 0 && pendingCandidates.length === 0 && (
-                    <div className="text-center p-8 text-orange-300/50 border-2 border-dashed border-orange-500/20 rounded-xl">
-                        No pending KYC requests.
-                    </div>
-                )}
+
+            <div className="bg-white border-t-4 border-blue-600 rounded-xl p-6 shadow-lg">
+              <h2 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2 border-b border-gray-100 pb-2">
+                <span className="text-blue-600">🏛️</span> NADRA Direct Auth
+              </h2>
+              <p className="text-xs font-medium text-slate-500 mb-4">Add a voter manually to bypass KYC and auto-issue EVT token.</p>
+              <div className="flex flex-col gap-4">
+                <input 
+                  type="text" 
+                  placeholder="0x..." 
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
+                  value={nadraWallet} onChange={e => setNadraWallet(e.target.value)}
+                />
+                <button 
+                  onClick={() => issueTokenAndApprove(nadraWallet, 'Voter', true)}
+                  disabled={!nadraWallet || isPending}
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-bold rounded-xl shadow-md transition-colors"
+                >
+                  Approve & Issue Token
+                </button>
+              </div>
             </div>
           </div>
 
-          <div className="bg-black/40 backdrop-blur-xl border border-green-500/20 rounded-2xl p-6 shadow-xl">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                <span className="text-green-400">??</span> Manage Elections
-              </h2>
-              <button onClick={fetchElections} className="p-2 hover:bg-green-500/20 rounded-full text-green-300 transition-colors" title="Refresh">
-                ??
-              </button>
-            </div>
-            
-            <div className="grid sm:grid-cols-2 gap-4">
-              {elections.map((el) => (
-                <div key={el.electionId} className="bg-black/60 border border-green-500/30 rounded-xl p-5 flex flex-col justify-between">
-                  <div>
-                    <div className="flex justify-between items-start">
-                      <h3 className="font-semibold text-white">{el.title}</h3>
-                      <span className={el.status === 'Active' ? 'text-xs px-2 py-1 rounded-md font-bold bg-green-500/20 text-green-300' : 'text-xs px-2 py-1 rounded-md font-bold bg-yellow-500/20 text-yellow-300'}>{el.status}</span>
-                    </div>
-                    {el.description && <p className="text-green-200/60 text-xs mt-1 line-clamp-1">{el.description}</p>}
-                    
-                    <div className="mt-4 space-y-1">
-                      <p className="text-xs text-green-300/70">Start: {new Date(el.startTime).toLocaleString()}</p>
-                      <p className="text-xs text-green-300/70">End: {new Date(el.endTime).toLocaleString()}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 pt-4 border-t border-green-500/20">
-                    {el.contractAddress ? (
-                      <div className="flex flex-col gap-2">
-                        <p className="text-xs text-green-400 font-mono break-all">Deployed: {el.contractAddress}</p>
-                        {el.status === 'Draft' && (
-                          <button 
-                            onClick={() => handleStartElection(el.contractAddress, el.electionId)}
-                            className="w-full py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-lg transition-colors"
-                          >
-                            Start Election
-                          </button>
-                        )}
-                        {el.status === 'Active' && (
-                          <div className="flex flex-col gap-2">
-                            <span className="text-xs font-bold text-green-300 text-center">? STATUS: ACTIVE (Voting Open)</span>
-                            <button 
-                              onClick={() => handleResolveElection(el.contractAddress, el.electionId)}
-                              disabled={isPending}
-                              className="w-full py-2 bg-red-700 hover:bg-red-800 disabled:opacity-50 text-white text-sm font-bold rounded-lg transition-colors"
-                            >
-                              Resolve Election
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <button 
-                        onClick={() => deployToBlockchain(el.electionId)}
-                        disabled={isPending}
-                        className="mt-2 w-full py-2 bg-[#115740] hover:bg-[#0D402F] disabled:opacity-50 text-white text-sm font-medium rounded-lg transition-colors"
-                      >
-                        {isPending ? 'Deploying...' : 'Deploy to Blockchain'}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+          {/* Right Col: Lists */}
+          <div className="md:col-span-2 space-y-8">
               
-              {elections.length === 0 && (
-                <div className="col-span-2 text-center p-8 text-green-300/50 border-2 border-dashed border-green-500/20 rounded-xl">
-                  No elections found. Draft one to get started.
-                </div>
-              )}
+            {/* Pending KYC Table */}
+            <div className="bg-white border-t-4 border-orange-500 rounded-xl p-6 shadow-lg">
+              <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+                <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                  <span className="text-orange-500">🛡️</span> Pending KYC Requests
+                </h2>
+                <button onClick={fetchPendingKyc} className="px-3 py-1 bg-orange-100 hover:bg-orange-200 rounded-lg text-orange-800 text-sm font-bold transition-colors" title="Refresh">
+                  Refresh
+                </button>
+              </div>
+              
+              <div className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                  {[...pendingVoters, ...pendingCandidates].map(user => (
+                      <div key={user.walletAddress} className="bg-gray-50 border border-gray-200 rounded-xl p-4 flex justify-between items-center hover:bg-gray-100 transition-colors">
+                          <div>
+                              <div className="flex gap-2 items-center">
+                                  <h3 className="font-bold text-slate-800">{user.name}</h3>
+                                  <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-orange-100 text-orange-800 uppercase tracking-wide">{user.role}</span>
+                              </div>
+                              <p className="text-xs font-mono text-slate-500 mt-1">{user.walletAddress}</p>
+                              <p className="text-xs font-medium text-slate-500 mt-1">CNIC: {user.cnic} | Age: {user.age}</p>
+                          </div>
+                          <button 
+                              onClick={() => issueTokenAndApprove(user.walletAddress, user.role, false)}
+                              disabled={isPending}
+                              className="px-6 py-2 bg-orange-600 hover:bg-orange-700 disabled:opacity-50 text-white text-sm font-bold rounded-lg shadow-sm transition-colors"
+                          >
+                              Approve
+                          </button>
+                      </div>
+                  ))}
+                  {pendingVoters.length === 0 && pendingCandidates.length === 0 && (
+                      <div className="text-center p-8 text-slate-400 font-medium border-2 border-dashed border-gray-200 rounded-xl">
+                          No pending KYC requests.
+                      </div>
+                  )}
+              </div>
+            </div>
+
+            <div className="bg-white border-t-4 border-[#004D28] rounded-xl p-6 shadow-lg">
+              <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
+                <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                  <span className="text-[#004D28]">⚙️</span> Manage Elections
+                </h2>
+                <button onClick={fetchElections} className="px-3 py-1 bg-green-100 hover:bg-green-200 rounded-lg text-green-800 text-sm font-bold transition-colors" title="Refresh">
+                  Refresh
+                </button>
+              </div>
+              
+              <div className="grid sm:grid-cols-2 gap-4">
+                {elections.map((el) => (
+                  <div key={el.electionId} className="bg-gray-50 border border-gray-200 hover:border-[#004D28]/30 rounded-xl p-5 flex flex-col justify-between transition-colors">
+                    <div>
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-bold text-slate-800">{el.title}</h3>
+                        <span className={el.status === 'Active' ? 'text-[10px] px-2 py-1 rounded-md font-bold uppercase tracking-wide bg-green-100 text-green-800' : 'text-[10px] px-2 py-1 rounded-md font-bold uppercase tracking-wide bg-yellow-100 text-yellow-800'}>{el.status}</span>
+                      </div>
+                      {el.description && <p className="text-slate-500 font-medium text-xs mt-2 line-clamp-2 h-8">{el.description}</p>}
+                      
+                      <div className="mt-4 space-y-1 bg-white p-2 rounded-lg border border-gray-100">
+                        <p className="text-xs font-medium text-slate-600"><span className="font-bold text-slate-400">Start:</span> {new Date(el.startTime).toLocaleString()}</p>
+                        <p className="text-xs font-medium text-slate-600"><span className="font-bold text-slate-400">End:</span> {new Date(el.endTime).toLocaleString()}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      {el.contractAddress ? (
+                        <div className="flex flex-col gap-3">
+                          <p className="text-[10px] text-slate-500 font-mono break-all font-bold"><span className="text-slate-400">Deployed:</span> {el.contractAddress}</p>
+                          {el.status === 'Draft' && (
+                            <button 
+                              onClick={() => handleStartElection(el.contractAddress, el.electionId)}
+                              className="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-lg shadow-sm transition-colors"
+                            >
+                              Start Election
+                            </button>
+                          )}
+                          {el.status === 'Active' && (
+                            <div className="flex flex-col gap-2">
+                              <span className="text-[10px] font-bold text-green-700 bg-green-100 px-2 py-1 rounded text-center uppercase tracking-wider">● STATUS: ACTIVE (Voting Open)</span>
+                              <button 
+                                onClick={() => handleResolveElection(el.contractAddress, el.electionId)}
+                                disabled={isPending}
+                                className="w-full py-2.5 bg-red-700 hover:bg-red-800 disabled:opacity-50 text-white text-sm font-bold rounded-lg shadow-sm transition-colors mt-1"
+                              >
+                                Resolve Election
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <button 
+                          onClick={() => deployToBlockchain(el.electionId)}
+                          disabled={isPending}
+                          className="mt-2 w-full py-2.5 bg-[#004D28] hover:bg-[#00381d] disabled:opacity-50 text-white text-sm font-bold rounded-lg shadow-sm transition-colors"
+                        >
+                          {isPending ? 'Deploying...' : 'Deploy to Blockchain'}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                
+                {elections.length === 0 && (
+                  <div className="col-span-2 text-center p-8 text-slate-400 font-medium border-2 border-dashed border-gray-200 rounded-xl">
+                    No elections found. Draft one to get started.
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

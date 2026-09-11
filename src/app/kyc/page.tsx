@@ -211,80 +211,94 @@ export default function KycPage() {
   );
 
   return (
-    <div className="max-w-2xl mx-auto p-6 py-12 relative z-10">
-      {/* Step Indicator */}
-      <div className="flex items-center justify-between mb-10 relative">
-        <div className="absolute left-0 right-0 top-5 h-0.5 bg-gray-200 -z-10" />
-        {stepMeta.map((s) => (
-          <div key={s.num} className="flex flex-col items-center gap-2 z-10">
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 ${step > s.num ? 'bg-[#115740] border-[#115740] text-white' : step === s.num ? 'bg-white border-[#115740] text-[#115740]' : 'bg-white border-gray-200 text-slate-400'}`}>
-              {step > s.num ? '✓' : s.num}
-            </div>
-            <span className={`text-xs font-medium text-center max-w-[90px] ${step >= s.num ? 'text-slate-700' : 'text-slate-400'}`}>{s.label}</span>
-          </div>
-        ))}
+    <div className="w-full bg-slate-50 min-h-screen flex flex-col">
+      {/* Official Header Section */}
+      <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37]">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-md">
+            Identity Verification
+          </h1>
+          <p className="text-lg text-green-50/90 font-light">
+            Securely verify your national identity using AI-driven facial recognition.
+          </p>
+        </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        {step === 1 && (
-          <motion.div key="step1" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8">
-            <h1 className="text-2xl font-bold text-slate-900 mb-1">Identity Verification</h1>
-            <p className="text-slate-500 text-sm mb-8">Our Gemini AI will verify your identity from your CNIC and selfie.</p>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                <input type="text" placeholder="As written on your CNIC" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#115740] outline-none" value={form.fullName} onChange={e => setForm({ ...form, fullName: e.target.value })} />
+      <div className="flex-1 max-w-2xl w-full mx-auto p-6 relative z-10 -mt-16 pb-20">
+        {/* Step Indicator */}
+        <div className="flex items-center justify-between mb-8 relative px-4">
+          <div className="absolute left-4 right-4 top-5 h-0.5 bg-gray-200 -z-10" />
+          {stepMeta.map((s) => (
+            <div key={s.num} className="flex flex-col items-center gap-2 z-10">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm border-2 shadow-sm ${step > s.num ? 'bg-[#004D28] border-[#004D28] text-white' : step === s.num ? 'bg-white border-[#004D28] text-[#004D28] shadow-[0_0_15px_rgba(0,77,40,0.3)]' : 'bg-white border-gray-200 text-slate-400'}`}>
+                {step > s.num ? '✓' : s.num}
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Date of Birth</label>
-                <input type="date" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#115740] outline-none" value={form.dob} onChange={e => setForm({ ...form, dob: e.target.value })} />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Election ID</label>
-                <input type="number" placeholder="e.g. 1" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#115740] outline-none" value={form.electionId} onChange={e => setForm({ ...form, electionId: e.target.value })} />
-              </div>
-              <div className="grid grid-cols-3 gap-4">
-                <UploadBox label="CNIC Front" value={cnicFront} inputRef={frontRef} onChange={e => handleFileChange(e, setCnicFront)} />
-                <UploadBox label="CNIC Back" value={cnicBack} inputRef={backRef} onChange={e => handleFileChange(e, setCnicBack)} />
-                <UploadBox label="Live Selfie" value={selfie} inputRef={selfieRef} onChange={e => handleFileChange(e, setSelfie)} onClickOverride={() => setShowCamera(true)} />
-              </div>
-              <button onClick={handleStep1Submit} disabled={isProcessing} className="w-full mt-2 py-3 bg-[#115740] hover:bg-[#0D402F] text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50">
-                {isProcessing ? 'AI Verifying...' : 'Verify My Identity →'}
-              </button>
+              <span className={`text-xs font-bold text-center max-w-[90px] uppercase tracking-wider ${step >= s.num ? 'text-[#004D28]' : 'text-slate-400'}`}>{s.label}</span>
             </div>
-          </motion.div>
-        )}
+          ))}
+        </div>
 
-        {step === 2 && (
-          <motion.div key="step2" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-[#115740]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">Identity Confirmed!</h2>
-            <p className="text-slate-500 mb-8">Now prove wallet ownership by signing a message. This does not cost any gas.</p>
-            {walletAddress && <div className="px-4 py-3 bg-gray-50 rounded-xl text-slate-700 font-mono text-sm mb-6 border border-gray-200">{walletAddress.slice(0, 8)}...{walletAddress.slice(-6)}</div>}
-            <button onClick={handleStep2Sign} disabled={isProcessing} className="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50">
-              {isProcessing ? 'Awaiting Signature...' : 'Sign & Authenticate Wallet'}
-            </button>
-          </motion.div>
-        )}
-
-        {step === 3 && (
-          <motion.div key="step3" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-3xl shadow-xl border border-gray-100 p-10 text-center">
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="w-20 h-20 bg-[#115740] rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-              </svg>
+        <AnimatePresence mode="wait">
+          {step === 1 && (
+            <motion.div key="step1" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8">
+              <h1 className="text-2xl font-bold text-[#004D28] mb-1">Upload Documents</h1>
+              <p className="text-slate-500 text-sm mb-8 font-medium">Please provide clear photos of your CNIC and a live selfie.</p>
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                  <input type="text" placeholder="As written on your CNIC" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none text-slate-900" value={form.fullName} onChange={e => setForm({ ...form, fullName: e.target.value })} />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Date of Birth</label>
+                  <input type="date" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none text-slate-900" value={form.dob} onChange={e => setForm({ ...form, dob: e.target.value })} />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Election ID</label>
+                  <input type="number" placeholder="e.g. 1" className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none text-slate-900" value={form.electionId} onChange={e => setForm({ ...form, electionId: e.target.value })} />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                  <UploadBox label="CNIC Front" value={cnicFront} inputRef={frontRef} onChange={e => handleFileChange(e, setCnicFront)} />
+                  <UploadBox label="CNIC Back" value={cnicBack} inputRef={backRef} onChange={e => handleFileChange(e, setCnicBack)} />
+                  <UploadBox label="Live Selfie" value={selfie} inputRef={selfieRef} onChange={e => handleFileChange(e, setSelfie)} onClickOverride={() => setShowCamera(true)} />
+                </div>
+                <button onClick={handleStep1Submit} disabled={isProcessing} className="w-full mt-4 py-4 bg-[#004D28] hover:bg-[#00381d] text-white font-bold rounded-xl shadow-lg shadow-[#004d28]/20 transition-all disabled:opacity-50">
+                  {isProcessing ? 'AI Verifying...' : 'Verify My Identity →'}
+                </button>
+              </div>
             </motion.div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">All Set!</h2>
-            <p className="text-slate-500">You are verified and authenticated. Redirecting to Voter Portal...</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {showCamera && <CameraCapture onCapture={(img) => { setSelfie(img); setShowCamera(false); }} onCancel={() => setShowCamera(false)} />}
+          )}
 
+          {step === 2 && (
+            <motion.div key="step2" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 text-center">
+              <div className="w-16 h-16 bg-[#004d28]/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-[#004D28]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-[#004D28] mb-3">Identity Confirmed!</h2>
+              <p className="text-slate-600 mb-8 font-medium leading-relaxed">Now prove wallet ownership by signing a message. This does not cost any gas.</p>
+              {walletAddress && <div className="px-4 py-3 bg-gray-50 rounded-xl text-slate-700 font-mono text-sm mb-6 border border-gray-200">{walletAddress.slice(0, 8)}...{walletAddress.slice(-6)}</div>}
+              <button onClick={handleStep2Sign} disabled={isProcessing} className="w-full py-4 bg-[#004D28] hover:bg-[#00381d] text-white font-bold rounded-xl shadow-lg transition-all disabled:opacity-50">
+                {isProcessing ? 'Awaiting Signature...' : 'Sign & Authenticate Wallet'}
+              </button>
+            </motion.div>
+          )}
+
+          {step === 3 && (
+            <motion.div key="step3" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-10 text-center">
+              <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', delay: 0.2 }} className="w-20 h-20 bg-[#004D28] rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#004d28]/30">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
+              </motion.div>
+              <h2 className="text-2xl font-bold text-[#004D28] mb-2">All Set!</h2>
+              <p className="text-slate-500 font-medium">You are verified and authenticated. Redirecting to Voter Portal...</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        {showCamera && <CameraCapture onCapture={(img) => { setSelfie(img); setShowCamera(false); }} onCancel={() => setShowCamera(false)} />}
+      </div>
     </div>
   );
 }

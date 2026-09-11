@@ -1,158 +1,148 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, Stars, Ring, Sphere, Torus } from '@react-three/drei';
+import React from 'react';
 import { motion } from 'framer-motion';
-
-// Majestic Blockchain Core representing National Security & Web3
-function GovtCore() {
-  const coreRef = useRef<any>(null);
-  const ring1Ref = useRef<any>(null);
-  const ring2Ref = useRef<any>(null);
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime();
-    if (coreRef.current) coreRef.current.rotation.y = t * 0.5;
-    if (ring1Ref.current) {
-      ring1Ref.current.rotation.x = t * 0.3;
-      ring1Ref.current.rotation.y = t * 0.4;
-    }
-    if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = -t * 0.2;
-      ring2Ref.current.rotation.z = t * 0.5;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1.5} position={[0, 0, 0]}>
-      <group>
-        {/* Outer Orbiting Blockchain Ring */}
-        <Torus ref={ring1Ref} args={[4, 0.05, 16, 100]} rotation={[Math.PI / 2, 0, 0]}>
-          <meshStandardMaterial color="#4ade80" emissive="#16a34a" emissiveIntensity={2} wireframe />
-        </Torus>
-
-        {/* Inner Orbiting Security Ring */}
-        <Torus ref={ring2Ref} args={[3, 0.1, 16, 100]}>
-          <meshStandardMaterial color="#ffffff" metalness={0.8} roughness={0.1} />
-        </Torus>
-
-        {/* Central Trust Sphere */}
-        <Sphere ref={coreRef} args={[1.5, 64, 64]}>
-          <meshStandardMaterial 
-            color="#0D402F" 
-            emissive="#115740" 
-            emissiveIntensity={0.5} 
-            metalness={0.9} 
-            roughness={0.1} 
-            wireframe={true} 
-          />
-        </Sphere>
-        
-        {/* Glowing Aura */}
-        <Sphere args={[1.8, 32, 32]}>
-          <meshBasicMaterial color="#22c55e" transparent opacity={0.1} />
-        </Sphere>
-      </group>
-    </Float>
-  );
-}
-
-// Floating Data Nodes (Voters/Identities)
-function DataParticles() {
-  const points = useMemo(() => {
-    const pts = [];
-    for (let i = 0; i < 40; i++) {
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 6 + Math.random() * 4;
-      pts.push([
-        r * Math.sin(phi) * Math.cos(theta),
-        r * Math.sin(phi) * Math.sin(theta),
-        r * Math.cos(phi)
-      ]);
-    }
-    return pts;
-  }, []);
-
-  return (
-    <group>
-      {points.map((p, i) => (
-        <Float key={i} speed={1.5 + Math.random()} floatIntensity={2} position={p as [number, number, number]}>
-          <Sphere args={[0.08, 8, 8]}>
-            <meshStandardMaterial color="#ffffff" emissive="#ffffff" emissiveIntensity={1.5} />
-          </Sphere>
-        </Float>
-      ))}
-    </group>
-  );
-}
 
 export default function Home() {
   return (
-    <div className="w-full bg-transparent">
-      {/* Premium 3D Background */}
-      <div className="fixed inset-0 w-full h-screen -z-10 pointer-events-none">
-        <Canvas camera={{ position: [0, 2, 12], fov: 50 }}>
-          <color attach="background" args={['#04170E']} />
-          <ambientLight intensity={0.5} color="#ffffff" />
-          <directionalLight position={[10, 20, 10]} intensity={2.0} color="#ffffff" />
-          <pointLight position={[-10, -10, -10]} intensity={5.0} color="#22c55e" />
+    <div className="w-full min-h-screen bg-slate-50 flex flex-col items-center">
+      
+      {/* Official Hero Section */}
+      <div className="w-full bg-[#004D28] text-white py-24 relative overflow-hidden border-b-8 border-[#d4af37]">
+        {/* Subtle geometric pattern overlay */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12">
           
-          <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex-1 text-center md:text-left"
+          >
+            <div className="inline-block mb-4 px-5 py-2 rounded-full border border-[#d4af37]/50 bg-[#d4af37]/10 text-[#d4af37] text-xs font-bold tracking-[0.2em] uppercase shadow-sm">
+              Government of Pakistan
+            </div>
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-md">
+              National Database & <br/> <span className="text-[#d4af37]">E-Voting</span> Authority
+            </h1>
+            <p className="text-lg md:text-xl text-green-50/90 mb-10 leading-relaxed font-light max-w-2xl mx-auto md:mx-0">
+              A state-of-the-art secure electronic voting infrastructure. Verify your identity seamlessly and cast your vote on a transparent, immutable Web3 ledger.
+            </p>
+          </motion.div>
           
-          <DataParticles />
-          
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-        </Canvas>
+          {/* Emblem Graphic Placeholder */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="hidden md:flex flex-col items-center justify-center relative w-64 h-64"
+          >
+            {/* Simulating an official glowing emblem */}
+            <div className="absolute inset-0 bg-[#d4af37] rounded-full blur-[80px] opacity-20 animate-pulse"></div>
+            <div className="w-48 h-48 rounded-full border-4 border-[#d4af37] bg-white/5 backdrop-blur-sm flex flex-col items-center justify-center shadow-[0_0_40px_rgba(212,175,55,0.3)]">
+              <span className="text-6xl text-[#d4af37] mb-2">☪</span>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-white text-center px-4">
+                State Security <br/> Verified
+              </span>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
 
-      {/* Foreground Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center bg-transparent px-4 pb-20">
-        <motion.div
+      {/* Main Actions Cards */}
+      <div className="relative z-20 -mt-12 max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-3 gap-8 pb-20">
+        
+        {/* Card 1: Voter KYC */}
+        <motion.a 
+          href="/kyc"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-          className="max-w-4xl text-center p-12"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          whileHover={{ y: -5, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
+          className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 flex flex-col items-center text-center transition-all group"
         >
-          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-green-500/30 bg-green-500/10 text-green-300 text-sm font-semibold tracking-widest uppercase">
-            Government of Pakistan
+          <div className="w-16 h-16 rounded-full bg-[#004D28]/10 text-[#004D28] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+            </svg>
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 drop-shadow-lg">
-            National E-Voting Portal
-          </h1>
-          <p className="text-lg md:text-2xl text-green-50/80 mb-10 leading-relaxed font-light max-w-3xl mx-auto">
-            A state-of-the-art cryptographic voting infrastructure. Verify your identity securely via AI and cast your vote on an immutable Web3 ledger.
+          <h2 className="text-2xl font-bold text-[#004D28] mb-3">Citizen KYC</h2>
+          <p className="text-gray-600 mb-6 font-medium leading-relaxed">
+            Verify your national identity securely using AI-driven facial recognition to receive your voting credentials.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a 
-              href="/kyc"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold shadow-lg shadow-green-600/30 transition-all border border-green-400/50 pointer-events-auto"
-            >
-              Start KYC Verification
-            </motion.a>
-            <motion.a 
-              href="/candidate"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold border border-white/30 transition-all shadow-md pointer-events-auto backdrop-blur-md"
-            >
-              Register as Candidate
-            </motion.a>
-            <motion.a 
-              href="/results"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-[#0A3020] hover:bg-[#115740] text-white rounded-xl font-bold border border-[#115740] transition-all shadow-lg pointer-events-auto"
-            >
-              View Active Elections
-            </motion.a>
+          <div className="mt-auto inline-flex items-center text-[#d4af37] font-bold group-hover:text-[#004D28] transition-colors">
+            Verify Now <span className="ml-2">→</span>
           </div>
-        </motion.div>
+        </motion.a>
+
+        {/* Card 2: Candidate Registration */}
+        <motion.a 
+          href="/candidate"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          whileHover={{ y: -5, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
+          className="bg-white rounded-xl shadow-lg border-t-4 border-[#d4af37] p-8 flex flex-col items-center text-center transition-all group"
+        >
+          <div className="w-16 h-16 rounded-full bg-[#d4af37]/10 text-[#d4af37] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-[#004D28] mb-3">Candidate Portal</h2>
+          <p className="text-gray-600 mb-6 font-medium leading-relaxed">
+            Register your candidacy for upcoming national elections. Submit documentation and track your application status.
+          </p>
+          <div className="mt-auto inline-flex items-center text-[#d4af37] font-bold group-hover:text-[#d4af37] transition-colors">
+            Register <span className="ml-2">→</span>
+          </div>
+        </motion.a>
+
+        {/* Card 3: Live Elections */}
+        <motion.a 
+          href="/results"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          whileHover={{ y: -5, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' }}
+          className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 flex flex-col items-center text-center transition-all group"
+        >
+          <div className="w-16 h-16 rounded-full bg-[#004D28]/10 text-[#004D28] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-[#004D28] mb-3">Live Elections</h2>
+          <p className="text-gray-600 mb-6 font-medium leading-relaxed">
+            View active national elections, cast your vote securely on the blockchain, and monitor real-time transparent results.
+          </p>
+          <div className="mt-auto inline-flex items-center text-[#d4af37] font-bold group-hover:text-[#004D28] transition-colors">
+            View Results <span className="ml-2">→</span>
+          </div>
+        </motion.a>
+
       </div>
+
+      {/* Trust Badges / Footer Info */}
+      <div className="w-full bg-white border-t border-gray-200 py-12 mt-auto">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-12 text-sm font-semibold text-gray-400">
+          <div className="flex items-center gap-3">
+            <svg className="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
+            Secured by Web3 Cryptography
+          </div>
+          <div className="flex items-center gap-3">
+            <svg className="w-6 h-6 text-[#d4af37]" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" /></svg>
+            Biometric AI Verification
+          </div>
+          <div className="flex items-center gap-3">
+            <svg className="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" /></svg>
+            Immutable Public Ledger
+          </div>
+        </div>
+      </div>
+      
     </div>
   );
 }

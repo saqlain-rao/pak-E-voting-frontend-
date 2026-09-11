@@ -70,38 +70,45 @@ export function Navbar() {
     setMounted(true);
   }, []);
 
-  const isAdmin = address?.toLowerCase() === '0x8f71bcd375fc18c49ad36dffeaacc016c49778b9'.toLowerCase();
+  const isAdmin = address?.toLowerCase() === '0x449F48A20CF8c3E9B738D9c88942a3E6bCe1aA95'.toLowerCase();
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-[#115740] shadow-md border-b border-[#0D402F] relative z-50">
+    <nav className="flex items-center justify-between px-6 py-4 bg-[#004D28] shadow-lg border-b-4 border-[#d4af37] relative z-50">
       <div className="flex items-center gap-8">
-        <a href="/" className="text-xl font-bold tracking-tight text-white cursor-pointer">
-          <span className="text-green-300">Verifi</span>Vote
+        <a href="/" className="flex flex-col cursor-pointer">
+          <span className="text-2xl font-extrabold tracking-widest text-white uppercase flex items-center gap-2">
+            <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
+              <span className="w-4 h-4 text-[#004D28]">☪</span>
+            </span>
+            NADRA
+          </span>
+          <span className="text-[0.65rem] font-medium tracking-widest text-[#d4af37] uppercase mt-0.5">
+            National E-Voting Authority
+          </span>
         </a>
-        <div className="hidden md:flex gap-6 text-sm font-medium">
-          <a href="/vote" className="text-green-50 hover:text-white transition-colors">Voter Portal</a>
-          <a href="/kyc" className="text-green-50 hover:text-white transition-colors">KYC Verify</a>
-          <a href="/candidate" className="text-green-50 hover:text-white transition-colors">Candidate Portal</a>
-          <a href="/results" className="text-green-50 hover:text-white transition-colors">Public Ledger</a>
+        <div className="hidden md:flex gap-8 text-sm font-semibold tracking-wide ml-4">
+          <a href="/vote" className="text-gray-200 hover:text-white hover:underline decoration-[#d4af37] underline-offset-8 transition-all">Voter Portal</a>
+          <a href="/kyc" className="text-gray-200 hover:text-white hover:underline decoration-[#d4af37] underline-offset-8 transition-all">KYC Verify</a>
+          <a href="/candidate" className="text-gray-200 hover:text-white hover:underline decoration-[#d4af37] underline-offset-8 transition-all">Candidate Portal</a>
+          <a href="/results" className="text-gray-200 hover:text-white hover:underline decoration-[#d4af37] underline-offset-8 transition-all">Public Ledger</a>
           {mounted && isAuthenticated && isAdmin && (
-            <a href="/admin" className="text-green-50 hover:text-white transition-colors">Admin Dashboard</a>
+            <a href="/admin" className="text-gray-200 hover:text-[#d4af37] transition-all">Admin Dashboard</a>
           )}
         </div>
       </div>
       
       <div className="flex items-center gap-4">
-        {/* Connect buttons have been moved to context-specific pages (Admin/Voter) */}
-        
         {mounted && isConnected && isAuthenticated && (
           <div className="flex items-center gap-3">
-            <span className="px-3 py-1.5 text-xs font-semibold text-green-300 bg-[#0D402F] rounded-lg border border-[#0D402F] text-white">
-              {address ? `${address.slice(0,6)}...${address.slice(-4)}` : 'Verified'}
+            <span className="px-3 py-1.5 text-xs font-bold text-[#004D28] bg-white rounded-md shadow-inner border border-gray-200 flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+              {address ? `${address.slice(0,6)}...${address.slice(-4)}` : 'Verified Citizen'}
             </span>
             <button 
               onClick={handleSignOut}
-              className="px-4 py-1.5 text-sm font-medium text-[#115740] bg-white hover:bg-gray-100 border border-transparent rounded-lg transition-colors shadow-sm cursor-pointer"
+              className="px-4 py-1.5 text-sm font-bold text-white bg-red-700 hover:bg-red-800 rounded-md transition-colors shadow-sm cursor-pointer"
             >
-              Disconnect
+              Sign Out
             </button>
           </div>
         )}

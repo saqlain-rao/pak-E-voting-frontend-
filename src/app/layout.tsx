@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VerifiVote - Enterprise Web3 Voting",
-  description: "Secure, AI-automated KYC Web3 voting platform",
+  title: "Pak e-Voting",
+  description: "Secure, NADRA-verified electronic voting platform",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-full flex flex-col bg-[#F4F9F6] text-slate-900" style={{ backgroundImage: "radial-gradient(#11574022 1px, transparent 1px)", backgroundSize: "32px 32px" }}>
         <Providers>
           <Navbar />
-          <Toaster position="top-right" toastOptions={{ style: { background: '#111', border: '1px solid #333', color: '#fff' } }} />
+          <Toaster position="top-right" toastOptions={{ style: { background: '#fff', border: '1px solid #115740', color: '#115740', fontWeight: 'bold' } }} />
           <main className="flex-1 relative">
             {children}
           </main>

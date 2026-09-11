@@ -7,55 +7,10 @@ import { injected } from 'wagmi/connectors';
 import toast from 'react-hot-toast';
 import api from '../../lib/api';
 import { parseAbi } from 'viem';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
-import { useMemo } from 'react';
 
 const ELECTION_ABI = parseAbi([
   'function registerCandidate(string memory _name, bytes calldata signature) external'
 ]);
-
-
-function DataParticles() {
-  const points = useMemo(() => {
-    const pts = [];
-    for (let i = 0; i < 40; i++) {
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(2 * Math.random() - 1);
-      const r = 6 + Math.random() * 4;
-      pts.push([
-        r * Math.sin(phi) * Math.cos(theta),
-        r * Math.sin(phi) * Math.sin(theta),
-        r * Math.cos(phi)
-      ]);
-    }
-    return pts;
-  }, []);
-  return (
-    <group>
-      {points.map((pos: any, i) => (
-        <mesh key={i} position={pos}>
-          <sphereGeometry args={[0.02, 8, 8]} />
-          <meshBasicMaterial color="#22c55e" />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-const Background = () => (
-  <div className="fixed inset-0 w-full h-screen -z-10 pointer-events-none">
-    <Canvas camera={{ position: [0, 2, 12], fov: 50 }}>
-      <color attach="background" args={['#04170E']} />
-      <ambientLight intensity={0.5} color="#ffffff" />
-      <directionalLight position={[10, 20, 10]} intensity={2.0} color="#ffffff" />
-      <pointLight position={[-10, -10, -10]} intensity={5.0} color="#22c55e" />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-      <DataParticles />
-      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-    </Canvas>
-  </div>
-);
 
 export default function CandidatePortal() {
   const { address, isConnected } = useAccount();
@@ -122,85 +77,94 @@ export default function CandidatePortal() {
   };
 
   return (
-    <div className="w-full bg-transparent min-h-screen">
-      <Background />
-      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="bg-black/40 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-green-500/20 p-8"
-      >
-        <h1 className="text-3xl font-bold text-white mb-2">Candidate Portal</h1>
-        <p className="text-green-200 mb-8">Register yourself as a candidate for an upcoming election.</p>
+    <div className="w-full bg-slate-50 min-h-screen">
+      
+      {/* Official Header Section */}
+      <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37]">
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-md">
+            Candidate Portal
+          </h1>
+          <p className="text-lg text-green-50/90 font-light">
+            Register yourself as a candidate for upcoming national elections.
+          </p>
+        </div>
+      </div>
 
-        <div className="space-y-6 max-w-xl">
-          
-          <div>
-            <label className="block text-sm font-semibold text-green-300 mb-2">Select Active Election</label>
-            <div className="grid md:grid-cols-2 gap-4">
-              {elections.map((el) => (
-                <div 
-                  key={el.electionId} 
-                  onClick={() => setSelectedElection(el)} 
-                  className={`cursor-pointer border rounded-2xl p-4 transition-all ${selectedElection?.electionId === el.electionId ? 'bg-green-500/20 border-green-400' : 'bg-black/40 border-green-500/20 hover:border-green-400/50'}`}
-                >
-                  <h3 className="text-xl font-bold text-white mb-1">{el.title}</h3>
-                  <p className="text-green-200/70 text-xs line-clamp-2 mb-2">{el.description}</p>
-                  <span className="text-[10px] px-2 py-1 bg-[#115740] rounded-full text-white">{el.status}</span>
-                </div>
-              ))}
-              {elections.length === 0 && (
-                 <div className="col-span-2 p-4 text-center text-green-300/50">No elections open for registration.</div>
-              )}
+      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10 -mt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] overflow-hidden p-8"
+        >
+          <div className="space-y-6 max-w-xl mx-auto">
+            
+            <div>
+              <label className="block text-sm font-semibold text-[#004D28] mb-2 uppercase tracking-wide">Select Active Election</label>
+              <div className="grid md:grid-cols-2 gap-4">
+                {elections.map((el) => (
+                  <div 
+                    key={el.electionId} 
+                    onClick={() => setSelectedElection(el)} 
+                    className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${selectedElection?.electionId === el.electionId ? 'bg-green-50 border-[#004D28]' : 'bg-gray-50 border-gray-200 hover:border-[#004D28]'}`}
+                  >
+                    <h3 className="text-lg font-bold text-slate-800 mb-1">{el.title}</h3>
+                    <p className="text-slate-500 text-xs line-clamp-2 mb-2">{el.description}</p>
+                    <span className="text-[10px] px-2 py-1 bg-[#d4af37] font-bold uppercase tracking-wider rounded text-white">{el.status}</span>
+                  </div>
+                ))}
+                {elections.length === 0 && (
+                   <div className="col-span-2 p-4 text-center text-slate-500 italic">No elections open for registration.</div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+              <input
+                type="text"
+                placeholder="e.g. John Doe"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none"
+                value={form.name}
+                onChange={e => setForm({...form, name: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Party Name</label>
+              <input
+                type="text"
+                placeholder="e.g. Independent, Green Party"
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none"
+                value={form.partyName}
+                onChange={e => setForm({...form, partyName: e.target.value})}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Campaign Proposal</label>
+              <textarea
+                placeholder="Outline your vision and promises..."
+                rows={4}
+                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none resize-none"
+                value={form.proposal}
+                onChange={e => setForm({...form, proposal: e.target.value})}
+              />
+            </div>
+
+            <div className="pt-4">
+              <button
+                onClick={handleRegister}
+                disabled={isProcessing}
+                className="w-full py-4 text-white font-bold text-lg bg-[#004D28] hover:bg-[#00381d] rounded-xl shadow-lg shadow-[#004d28]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              >
+                {isProcessing ? 'Processing Transaction...' : 'Connect Wallet & Register'}
+              </button>
             </div>
           </div>
-
-
-          <div>
-            <label className="block text-sm font-semibold text-green-300 mb-2">Full Name</label>
-            <input
-              type="text"
-              placeholder="e.g. John Doe"
-              className="w-full px-4 py-3 bg-black/60 border border-green-500/30 text-white rounded-xl focus:ring-2 focus:ring-[#115740] outline-none"
-              value={form.name}
-              onChange={e => setForm({...form, name: e.target.value})}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-green-300 mb-2">Party Name</label>
-            <input
-              type="text"
-              placeholder="e.g. Independent, Green Party"
-              className="w-full px-4 py-3 bg-black/60 border border-green-500/30 text-white rounded-xl focus:ring-2 focus:ring-[#115740] outline-none"
-              value={form.partyName}
-              onChange={e => setForm({...form, partyName: e.target.value})}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-green-300 mb-2">Campaign Proposal</label>
-            <textarea
-              placeholder="Outline your vision and promises..."
-              rows={4}
-              className="w-full px-4 py-3 bg-black/60 border border-green-500/30 text-white rounded-xl focus:ring-2 focus:ring-[#115740] outline-none resize-none"
-              value={form.proposal}
-              onChange={e => setForm({...form, proposal: e.target.value})}
-            />
-          </div>
-
-          <div className="pt-4">
-            <button
-              onClick={handleRegister}
-              disabled={isProcessing}
-              className="w-full py-4 text-white font-bold text-lg bg-[#115740] hover:bg-[#0D402F] rounded-xl shadow-lg transition-all disabled:opacity-50"
-            >
-              {isProcessing ? 'Processing Transaction...' : 'Connect Wallet & Register'}
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
     </div>
   );
 }
