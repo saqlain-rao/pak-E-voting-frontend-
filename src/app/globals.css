@@ -5,14 +5,27 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
+    100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+  }
 }
 
 :root {
-  /* NADRA Inspired Palette */
+  /* NADRA Inspired Premium Palette */
   --background: #f8fafc;
   --foreground: #0f172a;
   --primary-green: #004d28;
   --primary-green-light: #115740;
+  --primary-green-dark: #002614;
   --accent-gold: #d4af37;
   --accent-gold-light: #f5d76e;
 }
@@ -20,41 +33,67 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-/* Base Official Typography */
+/* Premium Typography */
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-green);
+  letter-spacing: -0.02em;
 }
 
-.bg-nadra-green {
-  background-color: var(--primary-green);
+/* Glassmorphism for official premium cards */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 30px -10px rgba(0, 77, 40, 0.15);
+  border-radius: 1rem;
 }
 
-.text-nadra-green {
-  color: var(--primary-green);
+.glass-panel-dark {
+  background: rgba(0, 38, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  color: white;
 }
 
-.border-nadra-green {
-  border-color: var(--primary-green);
+/* Rich Gradients */
+.bg-premium-green {
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
 }
 
-.bg-nadra-gold {
-  background-color: var(--accent-gold);
+.text-gradient-gold {
+  background: linear-gradient(to right, #d4af37, #f5d76e, #d4af37);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 3s linear infinite;
 }
 
-.text-nadra-gold {
-  color: var(--accent-gold);
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
-/* Glassmorphism for official cards */
-.official-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 77, 40, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border-radius: 0.75rem;
+.btn-premium {
+  background: linear-gradient(to right, var(--primary-green), var(--primary-green-light));
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 77, 40, 0.2);
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 77, 40, 0.4);
+  border-color: rgba(212, 175, 55, 0.5);
 }

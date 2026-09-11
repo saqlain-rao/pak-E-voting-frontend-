@@ -165,169 +165,182 @@ export default function VotePortal() {
   };
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen flex flex-col">
+    <div className="w-full bg-[#f8fafc] min-h-screen flex flex-col">
       {/* Official Header Section */}
-      <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37]">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-md text-center md:text-left">
-            Voter Portal
+      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
+            National E-Voting
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+            Voter <span className="text-gradient-gold">Portal</span>
           </h1>
-          <p className="text-lg text-green-50/90 font-light text-center md:text-left">
+          <p className="text-lg text-green-50/80 font-light max-w-2xl mx-auto">
             Select an active election to securely cast your vote on-chain.
           </p>
         </div>
       </div>
 
-      <div className="max-w-5xl w-full mx-auto p-6 relative z-10 -mt-16 pb-20">
+      <div className="max-w-5xl w-full mx-auto p-6 relative z-10 -mt-10 pb-20">
         {!selectedElection ? (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-8">
             
             {elections.map((el) => (
-              <div key={el.electionId} className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-6 transition-all hover:-translate-y-1">
+              <div key={el.electionId} className="glass-panel bg-white/80 border-t-4 border-t-[#004D28] p-8 transition-all hover:-translate-y-2 group hover:shadow-[0_20px_40px_-15px_rgba(0,77,40,0.3)]">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-bold text-[#004D28] leading-tight">{el.title}</h3>
-                  <span className={el.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-xs font-bold uppercase tracking-wider' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-bold uppercase tracking-wider'}>
+                  <h3 className="text-2xl font-extrabold text-[#004D28] leading-tight group-hover:text-[#002614] transition-colors">{el.title}</h3>
+                  <span className={el.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-green-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
                     {el.status}
                   </span>
                 </div>
                 <p className="text-slate-600 mb-6 text-sm line-clamp-2 h-10 font-medium">{el.description}</p>
-                <div className="flex justify-between text-xs text-slate-400 font-mono">
-                  <span>ID: {el.electionId}</span>
-                  <span>Contract: {el.contractAddress?.slice(0, 10)}...</span>
+                <div className="flex flex-col gap-1 text-[11px] text-slate-500 font-mono mb-8 bg-slate-50 p-3 rounded-lg border border-slate-100 shadow-inner">
+                  <div className="flex justify-between"><span className="font-bold text-slate-400">ID:</span> <span>{el.electionId}</span></div>
+                  <div className="flex justify-between"><span className="font-bold text-slate-400">CONTRACT:</span> <span>{el.contractAddress?.slice(0, 12)}...</span></div>
                 </div>
                 <button 
                     onClick={() => setSelectedElection(el)}
-                    className="mt-6 w-full py-3 bg-[#004D28] hover:bg-[#00381d] text-white font-bold rounded-xl shadow-md transition-all"
+                    className="w-full py-3.5 btn-premium font-bold rounded-xl text-sm tracking-widest uppercase"
                 >
                   Enter Portal
                 </button>
               </div>
             ))}
             {elections.length === 0 && (
-              <div className="col-span-2 bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-12 text-center">
-                <div className="text-5xl mb-4 opacity-50">🗳️</div>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">No Active Elections</h3>
-                <p className="text-slate-500">No active elections right now. Check back later.</p>
+              <div className="col-span-2 glass-panel bg-white/60 border-t-4 border-t-[#004D28] p-16 text-center border-dashed">
+                <div className="text-6xl mb-6 opacity-30 animate-pulse">🗳️</div>
+                <h3 className="text-2xl font-bold text-slate-800 mb-2">No Active Elections</h3>
+                <p className="text-slate-500 font-medium">There are currently no active or recent elections. Check back later.</p>
               </div>
             )}
           </motion.div>
         ) : (
-          <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
+          <motion.div initial={{ opacity: 0, scale: 0.98, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{type: 'spring', stiffness: 300, damping: 25}} className="space-y-8">
             <button onClick={() => setSelectedElection(null)}
-              className="text-[#004D28] hover:text-[#00381d] text-sm font-bold flex items-center gap-2 mb-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 w-fit">
+              className="text-[#004D28] hover:text-[#002614] text-xs font-bold uppercase tracking-wider flex items-center gap-2 mb-2 bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#004D28]/10 w-fit transition-all hover:bg-white hover:-translate-x-1">
               ← Back to Elections
             </button>
 
-            <div className="bg-white rounded-xl shadow-lg border-l-4 border-[#004D28] p-8">
-              <div className="flex justify-between items-start mb-2">
-                <h2 className="text-3xl font-bold text-[#004D28]">{selectedElection.title}</h2>
-                <span className={selectedElection.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-xs font-bold uppercase' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-xs font-bold uppercase'}>
+            <div className="glass-panel bg-white/80 border-l-[6px] border-l-[#d4af37] p-8 shadow-lg">
+              <div className="flex justify-between items-start mb-3">
+                <h2 className="text-3xl font-extrabold text-[#004D28] drop-shadow-sm">{selectedElection.title}</h2>
+                <span className={selectedElection.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-green-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
                     {selectedElection.status}
                 </span>
               </div>
-              <p className="text-slate-600 mb-4 font-medium">{selectedElection.description}</p>
-              <div className="text-xs text-slate-400 font-mono">Contract: {selectedElection.contractAddress}</div>
+              <p className="text-slate-600 mb-6 font-medium leading-relaxed max-w-3xl">{selectedElection.description}</p>
+              <div className="text-[11px] text-slate-500 font-mono bg-slate-100 inline-block px-4 py-2 rounded-lg border border-slate-200 shadow-inner"><span className="font-bold text-slate-400">CONTRACT:</span> {selectedElection.contractAddress}</div>
             </div>
 
             {/* Tie / Results Logic */}
             {selectedElection.status === 'Completed' && electionState === 3 && (
-                <div className="bg-white rounded-xl shadow-lg border-t-4 border-yellow-500 p-8 text-center">
-                    <div className="text-5xl mb-4">⚖️</div>
-                    <h3 className="text-3xl font-bold text-yellow-600 mb-2">Match Tie - 2nd Round Required</h3>
-                    <p className="text-slate-600 font-medium">The election resulted in a draw. Please await instructions for the second round.</p>
+                <div className="glass-panel bg-yellow-50/90 border-t-4 border-yellow-500 p-10 text-center shadow-lg">
+                    <div className="text-6xl mb-6">⚖️</div>
+                    <h3 className="text-3xl font-extrabold text-yellow-700 mb-4 drop-shadow-sm">Match Tie - 2nd Round Required</h3>
+                    <p className="text-yellow-800/80 font-medium max-w-lg mx-auto">The election resulted in a draw. Please await official instructions for the second round.</p>
                 </div>
             )}
 
             {selectedElection.status === 'Completed' && electionState !== 3 && (
-                <div className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 text-center">
-                    <div className="text-5xl mb-4">📊</div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2">Election Completed</h3>
-                    <p className="text-slate-600 font-medium">Voting is closed. Check the admin dashboard or blockchain for final results.</p>
+                <div className="glass-panel bg-white/90 border-t-4 border-[#004D28] p-10 text-center shadow-lg">
+                    <div className="text-6xl mb-6">📊</div>
+                    <h3 className="text-3xl font-extrabold text-[#004D28] mb-4 drop-shadow-sm">Election Completed</h3>
+                    <p className="text-slate-600 font-medium max-w-lg mx-auto mb-8">Voting is closed. Check the public ledger or admin dashboard for the final verified results.</p>
+                    <button onClick={() => router.push('/results')} className="btn-premium px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-sm">
+                      View Results
+                    </button>
                 </div>
             )}
 
             {/* Voting Interface */}
             {selectedElection.status === 'Active' && (
-                <>
+                <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{delay: 0.2}}>
                 {userHasVoted ? (
-                  <div className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 text-center">
-                    <div className="text-5xl mb-4">✅</div>
-                    <h3 className="text-2xl font-bold text-[#004D28] mb-2">Vote Recorded on Blockchain!</h3>
-                    <p className="text-slate-600 font-medium">Your vote has been permanently recorded. Thank you for participating.</p>
+                  <div className="glass-panel bg-green-50/90 border-t-4 border-green-600 p-12 text-center shadow-lg relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    <div className="text-7xl mb-6 relative z-10 drop-shadow-md">✅</div>
+                    <h3 className="text-3xl font-extrabold text-green-800 mb-4 relative z-10 drop-shadow-sm">Vote Recorded on Blockchain!</h3>
+                    <p className="text-green-700/80 font-medium max-w-xl mx-auto relative z-10 text-lg">Your vote has been permanently recorded on the distributed ledger. Thank you for fulfilling your national duty.</p>
                   </div>
                 ) : userHasToken ? (
-                  <div className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8">
-                    <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-                      <h3 className="text-2xl font-bold text-slate-800">Select a Candidate</h3>
-                      <span className="text-sm bg-green-100 text-green-800 font-bold px-4 py-1.5 rounded-full border border-green-200 shadow-sm">
+                  <div className="glass-panel bg-white/90 border-t-4 border-t-[#d4af37] p-8 shadow-lg">
+                    <div className="flex items-center justify-between mb-8 border-b border-[#004D28]/10 pb-5">
+                      <h3 className="text-2xl font-extrabold text-[#004D28] drop-shadow-sm">Select a Candidate</h3>
+                      <span className="text-[10px] bg-gradient-to-r from-[#d4af37] to-[#f5d76e] text-[#002614] font-bold px-4 py-2 rounded-full shadow-md uppercase tracking-widest border border-[#d4af37]/50 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                         1 Token Available
                       </span>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid md:grid-cols-2 gap-5">
                       {candidates.map(c => (
-                        <div key={c.candidateId} className="bg-gray-50 hover:bg-gray-100 p-5 rounded-xl border border-gray-200 flex justify-between items-center transition-colors">
+                        <div key={c.candidateId} className="bg-white hover:bg-slate-50 p-6 rounded-2xl border border-gray-200 flex justify-between items-center transition-all shadow-sm hover:shadow-md hover:border-[#d4af37]/50 group">
                           <div>
-                            <h4 className="font-bold text-lg text-slate-900">{c.name}</h4>
-                            <p className="text-[#004D28] font-bold text-sm uppercase tracking-wide mt-1">{c.partyName || 'Independent'}</p>
+                            <h4 className="font-extrabold text-xl text-slate-900 group-hover:text-[#004D28] transition-colors">{c.name}</h4>
+                            <p className="text-[#d4af37] font-bold text-[11px] uppercase tracking-widest mt-1 bg-[#d4af37]/10 inline-block px-2 py-0.5 rounded-sm">{c.partyName || 'Independent'}</p>
                           </div>
                           <button onClick={() => castVote(c.candidateId)} disabled={txPending}
-                            className="px-6 py-3 bg-[#004D28] hover:bg-[#00381d] disabled:opacity-50 text-white rounded-xl font-bold shadow-md transition-all">
-                            {txPending ? '...' : 'Vote'}
+                            className="px-8 py-3.5 btn-premium disabled:opacity-50 text-white rounded-xl font-bold shadow-md transition-all text-sm uppercase tracking-widest hover:scale-105 active:scale-95">
+                            {txPending ? 'Processing...' : 'Vote'}
                           </button>
                         </div>
                       ))}
                       {candidates.length === 0 && (
-                        <div className="col-span-2 p-8 text-center text-slate-500 font-medium">No candidates registered yet.</div>
+                        <div className="col-span-2 p-12 text-center text-slate-500 font-medium bg-slate-50 rounded-2xl border border-dashed border-gray-200">No candidates registered yet.</div>
                       )}
                     </div>
                   </div>
                 ) : !isAuthenticated ? (
-                  <div className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] p-8 text-center">
-                    <div className="text-4xl mb-4">🔐</div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2">Connect to Vote</h3>
-                    <p className="text-slate-600 mb-6 font-medium">Connect your wallet to check your eligibility.</p>
+                  <div className="glass-panel bg-white/90 border-t-4 border-[#004D28] p-12 text-center shadow-lg relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#004D28] opacity-5 rounded-bl-full"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#d4af37] opacity-10 rounded-tr-full"></div>
+                    <div className="text-6xl mb-6 relative z-10 drop-shadow-sm">🔐</div>
+                    <h3 className="text-3xl font-extrabold text-[#004D28] mb-4 relative z-10 drop-shadow-sm">Connect to Vote</h3>
+                    <p className="text-slate-600 mb-8 font-medium max-w-md mx-auto relative z-10">Connect your verified wallet to check your eligibility and receive your voting token.</p>
                     <button onClick={authenticateWallet}
-                      className="px-8 py-4 bg-[#004D28] hover:bg-[#00381d] text-white rounded-xl font-bold shadow-lg transition-all">
+                      className="px-10 py-4 btn-premium text-white rounded-xl font-bold shadow-lg transition-all uppercase tracking-widest text-sm relative z-10 hover:-translate-y-1">
                       Connect & Authenticate
                     </button>
                   </div>
                 ) : (
-                  <div className="bg-white rounded-xl shadow-lg border-t-4 border-orange-500 p-8 text-center">
-                    <div className="text-4xl mb-4">⏳</div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2">Not Eligible / Pending Approval</h3>
-                    <p className="text-slate-600 mb-6 font-medium max-w-lg mx-auto">You do not have a voting token for this election. If you haven't completed KYC, please do so. If you have, please wait for Admin Approval.</p>
+                  <div className="glass-panel bg-orange-50/90 border-t-4 border-orange-500 p-12 text-center shadow-lg">
+                    <div className="text-6xl mb-6">⏳</div>
+                    <h3 className="text-3xl font-extrabold text-orange-800 mb-4 drop-shadow-sm">Not Eligible / Pending Approval</h3>
+                    <p className="text-orange-900/80 mb-8 font-medium max-w-xl mx-auto leading-relaxed">
+                      You do not have a voting token for this election. If you haven't completed KYC, please do so. If you have, please wait for Admin Approval.
+                    </p>
                     <button onClick={() => router.push('/kyc')}
-                      className="px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-xl font-bold shadow-md transition-all">
+                      className="px-10 py-4 bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 text-white rounded-xl font-bold shadow-lg transition-all uppercase tracking-widest text-sm hover:-translate-y-1">
                       Go to KYC Portal
                     </button>
                   </div>
                 )}
-                </>
+                </motion.div>
             )}
 
             {/* Live Feed */}
             {selectedElection.status === 'Active' && liveFeed.length > 0 && (
-                <div className="bg-white rounded-xl shadow-lg border-t-4 border-blue-600 p-6">
-                    <h3 className="text-lg font-bold text-blue-800 mb-4 flex items-center gap-2">
+                <div className="glass-panel bg-white/80 border-l-[4px] border-l-blue-600 p-6 shadow-md mt-8">
+                    <h3 className="text-sm font-extrabold text-blue-900 mb-5 flex items-center gap-3 uppercase tracking-widest">
                         <span className="relative flex h-3 w-3">
                           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-600"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.8)]"></span>
                         </span>
                         Live Voting Feed
                     </h3>
                     <div className="space-y-3">
                         {liveFeed.map((event, i) => (
                             <motion.div 
-                                initial={{ opacity: 0, x: -20 }} 
-                                animate={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, x: -20, height: 0 }} 
+                                animate={{ opacity: 1, x: 0, height: 'auto' }}
                                 key={i} 
-                                className="bg-blue-50 border border-blue-100 rounded-lg p-3 text-sm flex justify-between items-center"
+                                className="bg-gradient-to-r from-blue-50 to-white border border-blue-100/50 rounded-xl p-4 text-sm flex justify-between items-center shadow-sm"
                             >
-                                <span className="text-slate-700">
-                                    <span className="font-mono text-blue-700 font-bold">{event.voter.slice(0,6)}...{event.voter.slice(-4)}</span> just voted for <span className="font-bold text-[#004D28]">{event.partyName}</span>!
+                                <span className="text-slate-600 font-medium">
+                                    <span className="font-mono text-blue-700 font-bold bg-blue-100/50 px-2 py-0.5 rounded">{event.voter.slice(0,6)}...{event.voter.slice(-4)}</span> just voted for <span className="font-extrabold text-[#004D28] underline decoration-[#d4af37] underline-offset-4">{event.partyName}</span>
                                 </span>
-                                <span className="text-xs text-slate-400 font-bold">{event.time}</span>
+                                <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider bg-slate-100 px-2 py-1 rounded-md">{event.time}</span>
                             </motion.div>
                         ))}
                     </div>

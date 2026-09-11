@@ -77,87 +77,92 @@ export default function CandidatePortal() {
   };
 
   return (
-    <div className="w-full bg-slate-50 min-h-screen">
+    <div className="w-full bg-[#f8fafc] min-h-screen">
       
       {/* Official Header Section */}
-      <div className="w-full bg-[#004D28] text-white py-12 relative overflow-hidden border-b-8 border-[#d4af37]">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-md">
-            Candidate Portal
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
+            Electoral Registration
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+            Candidate <span className="text-gradient-gold">Portal</span>
           </h1>
-          <p className="text-lg text-green-50/90 font-light">
-            Register yourself as a candidate for upcoming national elections.
+          <p className="text-lg text-green-50/80 font-light max-w-2xl mx-auto">
+            Register yourself as a candidate for upcoming national elections on the secure ledger.
           </p>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10 -mt-16">
+      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10 -mt-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-xl shadow-lg border-t-4 border-[#004D28] overflow-hidden p-8"
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          className="glass-panel bg-white/80 border-t-[6px] border-t-[#d4af37] overflow-hidden p-8 shadow-2xl backdrop-blur-xl"
         >
-          <div className="space-y-6 max-w-xl mx-auto">
+          <div className="space-y-8 max-w-xl mx-auto">
             
             <div>
-              <label className="block text-sm font-semibold text-[#004D28] mb-2 uppercase tracking-wide">Select Active Election</label>
+              <label className="block text-xs font-extrabold text-[#004D28] mb-3 uppercase tracking-widest border-b border-[#004D28]/10 pb-2">Select Active Election</label>
               <div className="grid md:grid-cols-2 gap-4">
                 {elections.map((el) => (
                   <div 
                     key={el.electionId} 
                     onClick={() => setSelectedElection(el)} 
-                    className={`cursor-pointer border-2 rounded-xl p-4 transition-all ${selectedElection?.electionId === el.electionId ? 'bg-green-50 border-[#004D28]' : 'bg-gray-50 border-gray-200 hover:border-[#004D28]'}`}
+                    className={`cursor-pointer rounded-xl p-5 transition-all shadow-sm border-2 group ${selectedElection?.electionId === el.electionId ? 'bg-gradient-to-br from-[#004D28]/10 to-transparent border-[#004D28] shadow-[0_8px_20px_rgba(0,77,40,0.15)] -translate-y-1' : 'bg-white/50 border-gray-200 hover:border-[#d4af37] hover:bg-white/80 hover:shadow-md'}`}
                   >
-                    <h3 className="text-lg font-bold text-slate-800 mb-1">{el.title}</h3>
-                    <p className="text-slate-500 text-xs line-clamp-2 mb-2">{el.description}</p>
-                    <span className="text-[10px] px-2 py-1 bg-[#d4af37] font-bold uppercase tracking-wider rounded text-white">{el.status}</span>
+                    <h3 className={`text-lg font-extrabold mb-2 transition-colors ${selectedElection?.electionId === el.electionId ? 'text-[#004D28]' : 'text-slate-800 group-hover:text-[#004D28]'}`}>{el.title}</h3>
+                    <p className="text-slate-500 text-xs line-clamp-2 mb-4 font-medium leading-relaxed">{el.description}</p>
+                    <span className="text-[9px] px-3 py-1 bg-gradient-to-r from-[#d4af37] to-[#f5d76e] font-bold uppercase tracking-widest rounded-md text-[#002614] shadow-sm">{el.status}</span>
                   </div>
                 ))}
                 {elections.length === 0 && (
-                   <div className="col-span-2 p-4 text-center text-slate-500 italic">No elections open for registration.</div>
+                   <div className="col-span-2 p-8 text-center text-slate-500 font-medium bg-slate-50/50 rounded-xl border border-dashed border-gray-200">No elections open for registration.</div>
                 )}
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Full Legal Name</label>
               <input
                 type="text"
                 placeholder="e.g. John Doe"
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none transition-all shadow-inner font-medium"
                 value={form.name}
                 onChange={e => setForm({...form, name: e.target.value})}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Party Name</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Political Party Affiliation</label>
               <input
                 type="text"
                 placeholder="e.g. Independent, Green Party"
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none transition-all shadow-inner font-medium"
                 value={form.partyName}
                 onChange={e => setForm({...form, partyName: e.target.value})}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Campaign Proposal</label>
+              <label className="block text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wider">Campaign Proposal & Vision</label>
               <textarea
-                placeholder="Outline your vision and promises..."
+                placeholder="Outline your vision and promises for the country..."
                 rows={4}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] outline-none resize-none"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none resize-none transition-all shadow-inner font-medium leading-relaxed"
                 value={form.proposal}
                 onChange={e => setForm({...form, proposal: e.target.value})}
               />
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6 border-t border-gray-100">
               <button
                 onClick={handleRegister}
                 disabled={isProcessing}
-                className="w-full py-4 text-white font-bold text-lg bg-[#004D28] hover:bg-[#00381d] rounded-xl shadow-lg shadow-[#004d28]/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full py-4.5 text-white font-bold text-sm uppercase tracking-widest btn-premium rounded-xl shadow-[0_10px_25px_rgba(0,77,40,0.3)] hover:shadow-[0_15px_30px_rgba(0,77,40,0.4)] transition-all disabled:opacity-50 flex items-center justify-center gap-2 hover:-translate-y-1 active:translate-y-0"
               >
                 {isProcessing ? 'Processing Transaction...' : 'Connect Wallet & Register'}
               </button>
