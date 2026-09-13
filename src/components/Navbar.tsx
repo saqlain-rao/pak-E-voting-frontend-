@@ -82,7 +82,7 @@ export function Navbar() {
             </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 group-hover:to-white transition-all">PAK E-VOTING</span>
           </span>
-          <span className="text-[0.65rem] font-medium tracking-widest text-[#d4af37] uppercase mt-0.5 opacity-90 group-hover:opacity-100 transition-opacity">
+          <span className="text-[0.65rem] font-medium tracking-widest text-[#d4af37] uppercase mt-0.5 ml-11 opacity-90 group-hover:opacity-100 transition-opacity">
             Secure Web3 Platform
           </span>
         </a>
