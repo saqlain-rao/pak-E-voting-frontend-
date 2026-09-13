@@ -100,26 +100,25 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           whileHover={{ y: -10, scale: 1.02 }}
-          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white backdrop-blur-2xl border border-[#d4af37]/30 rounded-3xl shadow-[0_20px_50px_-15px_rgba(212,175,55,0.2)] hover:shadow-[0_40px_80px_-15px_rgba(212,175,55,0.4)] hover:border-[#d4af37]/60 transition-all duration-500"
+          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,77,40,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(0,77,40,0.3)] hover:border-[#004D28]/40 transition-all duration-500"
         >
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#d4af37] via-[#f5d76e] to-[#d4af37] bg-[length:200%_100%] animate-shine"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#d4af37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#004D28]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
           <div className="relative w-24 h-24 mb-8 flex items-center justify-center">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#d4af37]/30 to-[#d4af37]/10 rounded-3xl transform rotate-6 group-hover:rotate-12 transition-transform duration-500"></div>
-            <div className="absolute inset-0 bg-white/90 backdrop-blur-md rounded-3xl border border-white shadow-lg flex items-center justify-center group-hover:-rotate-3 transition-transform duration-500">
-              <svg className="w-10 h-10 text-[#a68621]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className="absolute inset-0 bg-gradient-to-br from-[#004D28]/20 to-[#004D28]/5 rounded-3xl transform rotate-6 group-hover:rotate-12 transition-transform duration-500"></div>
+            <div className="absolute inset-0 bg-white/80 backdrop-blur-md rounded-3xl border border-white/60 shadow-lg flex items-center justify-center group-hover:-rotate-3 transition-transform duration-500">
+              <svg className="w-10 h-10 text-[#004D28]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
               </svg>
             </div>
           </div>
           
-          <h2 className="text-2xl font-black text-[#a68621] mb-4 tracking-tight relative z-10">Candidate Portal</h2>
+          <h2 className="text-2xl font-black text-[#004D28] mb-4 tracking-tight relative z-10">Candidate Portal</h2>
           <p className="text-slate-600 mb-8 font-medium leading-relaxed text-sm relative z-10">
             Submit your official candidacy documentation. Track your verified status and campaign profile on the immutable blockchain.
           </p>
           
-          <div className="mt-auto px-8 py-3.5 bg-white border-2 border-[#d4af37]/20 text-[#a68621] rounded-xl font-bold group-hover:bg-gradient-to-r group-hover:from-[#d4af37] group-hover:to-[#f5d76e] group-hover:text-[#002614] group-hover:border-transparent transition-all duration-300 shadow-sm group-hover:shadow-[0_10px_20px_rgba(212,175,55,0.3)] text-sm w-full relative z-10 uppercase tracking-wider">
+          <div className="mt-auto px-8 py-3.5 bg-white border-2 border-[#004D28]/10 text-[#004D28] rounded-xl font-bold group-hover:bg-[#004D28] group-hover:text-white group-hover:border-[#004D28] transition-all duration-300 shadow-sm group-hover:shadow-[0_10px_20px_rgba(0,77,40,0.2)] text-sm w-full relative z-10 uppercase tracking-wider">
             Register Candidate
           </div>
         </motion.a>
