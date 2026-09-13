@@ -61,7 +61,7 @@ export default function Home() {
       </div>
 
       {/* Main Actions Cards */}
-      <div className="relative z-20 -mt-20 max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-3 gap-8 pb-24">
+      <div className="relative z-20 mt-12 max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-3 gap-8 pb-24">
         
         {/* Card 1: Voter KYC */}
         <motion.a 
