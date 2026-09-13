@@ -73,7 +73,7 @@ export function Navbar() {
   const isAdmin = address?.toLowerCase() === '0x449F48A20CF8c3E9B738D9c88942a3E6bCe1aA95'.toLowerCase();
 
   return (
-    <nav className="fixed top-4 left-4 right-4 md:left-8 md:right-8 lg:left-12 lg:right-12 glass-panel-dark flex items-center justify-between px-6 py-4 shadow-2xl z-50 transition-all duration-300">
+    <nav className="absolute top-4 left-4 right-4 md:left-8 md:right-8 lg:left-12 lg:right-12 glass-panel-dark flex items-center justify-between px-6 py-4 shadow-2xl z-50 transition-all duration-300">
       <div className="flex items-center gap-8">
         <a href="/" className="flex flex-col cursor-pointer group">
           <span className="text-2xl font-extrabold tracking-widest text-white uppercase flex items-center gap-3">
