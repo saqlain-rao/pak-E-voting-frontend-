@@ -80,10 +80,10 @@ export function Navbar() {
             <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f5d76e] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform duration-300">
               <span className="w-4 h-4 text-[#002614] flex items-center justify-center -ml-0.5 mt-0.5">☪</span>
             </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 group-hover:to-white transition-all">NADRA</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 group-hover:to-white transition-all">PAK E-VOTING</span>
           </span>
           <span className="text-[0.65rem] font-medium tracking-widest text-[#d4af37] uppercase mt-0.5 opacity-90 group-hover:opacity-100 transition-opacity">
-            National E-Voting Authority
+            Secure Web3 Platform
           </span>
         </a>
         <div className="hidden md:flex gap-6 text-sm font-semibold tracking-wide ml-6">
