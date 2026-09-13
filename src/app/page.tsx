@@ -70,7 +70,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           whileHover={{ y: -10, scale: 1.02 }}
-          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white/70 backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,77,40,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(0,77,40,0.3)] hover:border-[#004D28]/40 transition-all duration-500"
+          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,77,40,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(0,77,40,0.3)] hover:border-[#004D28]/40 transition-all duration-500"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#004D28]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
@@ -100,7 +100,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           whileHover={{ y: -10, scale: 1.02 }}
-          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-gradient-to-b from-[#fefbf0] to-white/90 backdrop-blur-2xl border border-[#d4af37]/30 rounded-3xl shadow-[0_20px_50px_-15px_rgba(212,175,55,0.2)] hover:shadow-[0_40px_80px_-15px_rgba(212,175,55,0.4)] hover:border-[#d4af37]/60 transition-all duration-500"
+          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-[#fffbea] backdrop-blur-2xl border border-[#d4af37]/30 rounded-3xl shadow-[0_20px_50px_-15px_rgba(212,175,55,0.2)] hover:shadow-[0_40px_80px_-15px_rgba(212,175,55,0.4)] hover:border-[#d4af37]/60 transition-all duration-500"
         >
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#d4af37] via-[#f5d76e] to-[#d4af37] bg-[length:200%_100%] animate-shine"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#d4af37]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -131,7 +131,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           whileHover={{ y: -10, scale: 1.02 }}
-          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white/70 backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,77,40,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(0,77,40,0.3)] hover:border-[#004D28]/40 transition-all duration-500"
+          className="relative overflow-hidden p-8 flex flex-col items-center text-center group bg-white backdrop-blur-2xl border border-white/80 rounded-3xl shadow-[0_20px_50px_-15px_rgba(0,77,40,0.15)] hover:shadow-[0_40px_80px_-15px_rgba(0,77,40,0.3)] hover:border-[#004D28]/40 transition-all duration-500"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#004D28]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           
