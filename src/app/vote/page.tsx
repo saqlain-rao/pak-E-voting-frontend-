@@ -167,17 +167,17 @@ export default function VotePortal() {
   return (
     <div className="w-full bg-[#f8fafc] min-h-screen flex flex-col">
       {/* Official Header Section */}
-      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
+      <div className="w-full bg-premium-blue text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002d5c] to-transparent opacity-80"></div>
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
             National E-Voting
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl !text-[#d4af37]">
             Voter <span className="text-gradient-gold">Portal</span>
           </h1>
-          <p className="text-lg text-green-50/80 font-light max-w-2xl mx-auto">
+          <p className="text-lg text-blue-50/80 font-light max-w-2xl mx-auto">
             Select an active election to securely cast your vote on-chain.
           </p>
         </div>
@@ -188,10 +188,10 @@ export default function VotePortal() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-8">
             
             {elections.map((el) => (
-              <div key={el.electionId} className="glass-panel bg-white/80 border-t-4 border-t-[#004D28] p-8 transition-all hover:-translate-y-2 group hover:shadow-[0_20px_40px_-15px_rgba(0,77,40,0.3)]">
+              <div key={el.electionId} className="glass-panel bg-white/80 border-t-4 border-t-[#1d70b8] p-8 transition-all hover:-translate-y-2 group hover:shadow-[0_20px_40px_-15px_rgba(0,77,40,0.3)]">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-2xl font-extrabold text-[#004D28] leading-tight group-hover:text-[#002614] transition-colors">{el.title}</h3>
-                  <span className={el.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-green-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
+                  <h3 className="text-2xl font-extrabold text-[#1d70b8] leading-tight group-hover:text-[#002d5c] transition-colors">{el.title}</h3>
+                  <span className={el.status === 'Active' ? 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
                     {el.status}
                   </span>
                 </div>
@@ -209,7 +209,7 @@ export default function VotePortal() {
               </div>
             ))}
             {elections.length === 0 && (
-              <div className="col-span-2 glass-panel bg-white/60 border-t-4 border-t-[#004D28] p-16 text-center border-dashed">
+              <div className="col-span-2 glass-panel bg-white/60 border-t-4 border-t-[#1d70b8] p-16 text-center border-dashed">
                 <div className="text-6xl mb-6 opacity-30 animate-pulse">🗳️</div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">No Active Elections</h3>
                 <p className="text-slate-500 font-medium">There are currently no active or recent elections. Check back later.</p>
@@ -219,14 +219,14 @@ export default function VotePortal() {
         ) : (
           <motion.div initial={{ opacity: 0, scale: 0.98, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{type: 'spring', stiffness: 300, damping: 25}} className="space-y-8">
             <button onClick={() => setSelectedElection(null)}
-              className="text-[#004D28] hover:text-[#002614] text-xs font-bold uppercase tracking-wider flex items-center gap-2 mb-2 bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#004D28]/10 w-fit transition-all hover:bg-white hover:-translate-x-1">
+              className="text-[#1d70b8] hover:text-[#002d5c] text-xs font-bold uppercase tracking-wider flex items-center gap-2 mb-2 bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#1d70b8]/10 w-fit transition-all hover:bg-white hover:-translate-x-1">
               ← Back to Elections
             </button>
 
             <div className="glass-panel bg-white/80 border-l-[6px] border-l-[#d4af37] p-8 shadow-lg">
               <div className="flex justify-between items-start mb-3">
-                <h2 className="text-3xl font-extrabold text-[#004D28] drop-shadow-sm">{selectedElection.title}</h2>
-                <span className={selectedElection.status === 'Active' ? 'px-3 py-1 bg-green-100 text-green-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-green-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
+                <h2 className="text-3xl font-extrabold text-[#1d70b8] drop-shadow-sm">{selectedElection.title}</h2>
+                <span className={selectedElection.status === 'Active' ? 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200' : 'px-3 py-1 bg-blue-100 text-blue-800 rounded-md text-[10px] font-bold uppercase tracking-widest border border-blue-200'}>
                     {selectedElection.status}
                 </span>
               </div>
@@ -244,9 +244,9 @@ export default function VotePortal() {
             )}
 
             {selectedElection.status === 'Completed' && electionState !== 3 && (
-                <div className="glass-panel bg-white/90 border-t-4 border-[#004D28] p-10 text-center shadow-lg">
+                <div className="glass-panel bg-white/90 border-t-4 border-[#1d70b8] p-10 text-center shadow-lg">
                     <div className="text-6xl mb-6">📊</div>
-                    <h3 className="text-3xl font-extrabold text-[#004D28] mb-4 drop-shadow-sm">Election Completed</h3>
+                    <h3 className="text-3xl font-extrabold text-[#1d70b8] mb-4 drop-shadow-sm">Election Completed</h3>
                     <p className="text-slate-600 font-medium max-w-lg mx-auto mb-8">Voting is closed. Check the public ledger or admin dashboard for the final verified results.</p>
                     <button onClick={() => router.push('/results')} className="btn-premium px-8 py-3.5 rounded-xl font-bold uppercase tracking-widest text-sm">
                       View Results
@@ -258,17 +258,17 @@ export default function VotePortal() {
             {selectedElection.status === 'Active' && (
                 <motion.div initial={{opacity: 0, y: 20}} animate={{opacity: 1, y: 0}} transition={{delay: 0.2}}>
                 {userHasVoted ? (
-                  <div className="glass-panel bg-green-50/90 border-t-4 border-green-600 p-12 text-center shadow-lg relative overflow-hidden">
+                  <div className="glass-panel bg-blue-50/90 border-t-4 border-blue-600 p-12 text-center shadow-lg relative overflow-hidden">
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                     <div className="text-7xl mb-6 relative z-10 drop-shadow-md">✅</div>
-                    <h3 className="text-3xl font-extrabold text-green-800 mb-4 relative z-10 drop-shadow-sm">Vote Recorded on Blockchain!</h3>
-                    <p className="text-green-700/80 font-medium max-w-xl mx-auto relative z-10 text-lg">Your vote has been permanently recorded on the distributed ledger. Thank you for fulfilling your national duty.</p>
+                    <h3 className="text-3xl font-extrabold text-blue-800 mb-4 relative z-10 drop-shadow-sm">Vote Recorded on Blockchain!</h3>
+                    <p className="text-blue-700/80 font-medium max-w-xl mx-auto relative z-10 text-lg">Your vote has been permanently recorded on the distributed ledger. Thank you for fulfilling your national duty.</p>
                   </div>
                 ) : userHasToken ? (
                   <div className="glass-panel bg-white/90 border-t-4 border-t-[#d4af37] p-8 shadow-lg">
-                    <div className="flex items-center justify-between mb-8 border-b border-[#004D28]/10 pb-5">
-                      <h3 className="text-2xl font-extrabold text-[#004D28] drop-shadow-sm">Select a Candidate</h3>
-                      <span className="text-[10px] bg-gradient-to-r from-[#d4af37] to-[#f5d76e] text-[#002614] font-bold px-4 py-2 rounded-full shadow-md uppercase tracking-widest border border-[#d4af37]/50 flex items-center gap-2">
+                    <div className="flex items-center justify-between mb-8 border-b border-[#1d70b8]/10 pb-5">
+                      <h3 className="text-2xl font-extrabold text-[#1d70b8] drop-shadow-sm">Select a Candidate</h3>
+                      <span className="text-[10px] bg-gradient-to-r from-[#d4af37] to-[#f5d76e] text-[#002d5c] font-bold px-4 py-2 rounded-full shadow-md uppercase tracking-widest border border-[#d4af37]/50 flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                         1 Token Available
                       </span>
@@ -277,7 +277,7 @@ export default function VotePortal() {
                       {candidates.map(c => (
                         <div key={c.candidateId} className="bg-white hover:bg-slate-50 p-6 rounded-2xl border border-gray-200 flex justify-between items-center transition-all shadow-sm hover:shadow-md hover:border-[#d4af37]/50 group">
                           <div>
-                            <h4 className="font-extrabold text-xl text-slate-900 group-hover:text-[#004D28] transition-colors">{c.name}</h4>
+                            <h4 className="font-extrabold text-xl text-slate-900 group-hover:text-[#1d70b8] transition-colors">{c.name}</h4>
                             <p className="text-[#d4af37] font-bold text-[11px] uppercase tracking-widest mt-1 bg-[#d4af37]/10 inline-block px-2 py-0.5 rounded-sm">{c.partyName || 'Independent'}</p>
                           </div>
                           <button onClick={() => castVote(c.candidateId)} disabled={txPending}
@@ -292,11 +292,11 @@ export default function VotePortal() {
                     </div>
                   </div>
                 ) : !isAuthenticated ? (
-                  <div className="glass-panel bg-white/90 border-t-4 border-[#004D28] p-12 text-center shadow-lg relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#004D28] opacity-5 rounded-bl-full"></div>
+                  <div className="glass-panel bg-white/90 border-t-4 border-[#1d70b8] p-12 text-center shadow-lg relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[#1d70b8] opacity-5 rounded-bl-full"></div>
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#d4af37] opacity-10 rounded-tr-full"></div>
                     <div className="text-6xl mb-6 relative z-10 drop-shadow-sm">🔐</div>
-                    <h3 className="text-3xl font-extrabold text-[#004D28] mb-4 relative z-10 drop-shadow-sm">Connect to Vote</h3>
+                    <h3 className="text-3xl font-extrabold text-[#1d70b8] mb-4 relative z-10 drop-shadow-sm">Connect to Vote</h3>
                     <p className="text-slate-600 mb-8 font-medium max-w-md mx-auto relative z-10">Connect your verified wallet to check your eligibility and receive your voting token.</p>
                     <button onClick={authenticateWallet}
                       className="px-10 py-4 btn-premium text-white rounded-xl font-bold shadow-lg transition-all uppercase tracking-widest text-sm relative z-10 hover:-translate-y-1">
@@ -338,7 +338,7 @@ export default function VotePortal() {
                                 className="bg-gradient-to-r from-blue-50 to-white border border-blue-100/50 rounded-xl p-4 text-sm flex justify-between items-center shadow-sm"
                             >
                                 <span className="text-slate-600 font-medium">
-                                    <span className="font-mono text-blue-700 font-bold bg-blue-100/50 px-2 py-0.5 rounded">{event.voter.slice(0,6)}...{event.voter.slice(-4)}</span> just voted for <span className="font-extrabold text-[#004D28] underline decoration-[#d4af37] underline-offset-4">{event.partyName}</span>
+                                    <span className="font-mono text-blue-700 font-bold bg-blue-100/50 px-2 py-0.5 rounded">{event.voter.slice(0,6)}...{event.voter.slice(-4)}</span> just voted for <span className="font-extrabold text-[#1d70b8] underline decoration-[#d4af37] underline-offset-4">{event.partyName}</span>
                                 </span>
                                 <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider bg-slate-100 px-2 py-1 rounded-md">{event.time}</span>
                             </motion.div>

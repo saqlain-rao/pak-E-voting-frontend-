@@ -80,17 +80,17 @@ export default function CandidatePortal() {
     <div className="w-full bg-[#f8fafc] min-h-screen">
       
       {/* Official Header Section */}
-      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
+      <div className="w-full bg-premium-blue text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002d5c] to-transparent opacity-80"></div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
             Electoral Registration
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl !text-[#d4af37]">
             Candidate <span className="text-gradient-gold">Portal</span>
           </h1>
-          <p className="text-lg text-green-50/80 font-light max-w-2xl mx-auto">
+          <p className="text-lg text-blue-50/80 font-light max-w-2xl mx-auto">
             Register yourself as a candidate for upcoming national elections on the secure ledger.
           </p>
         </div>
@@ -106,17 +106,17 @@ export default function CandidatePortal() {
           <div className="space-y-8 max-w-xl mx-auto">
             
             <div>
-              <label className="block text-xs font-extrabold text-[#004D28] mb-3 uppercase tracking-widest border-b border-[#004D28]/10 pb-2">Select Active Election</label>
+              <label className="block text-xs font-extrabold text-[#1d70b8] mb-3 uppercase tracking-widest border-b border-[#1d70b8]/10 pb-2">Select Active Election</label>
               <div className="grid md:grid-cols-2 gap-4">
                 {elections.map((el) => (
                   <div 
                     key={el.electionId} 
                     onClick={() => setSelectedElection(el)} 
-                    className={`cursor-pointer rounded-xl p-5 transition-all shadow-sm border-2 group ${selectedElection?.electionId === el.electionId ? 'bg-gradient-to-br from-[#004D28]/10 to-transparent border-[#004D28] shadow-[0_8px_20px_rgba(0,77,40,0.15)] -translate-y-1' : 'bg-white/50 border-gray-200 hover:border-[#d4af37] hover:bg-white/80 hover:shadow-md'}`}
+                    className={`cursor-pointer rounded-xl p-5 transition-all shadow-sm border-2 group ${selectedElection?.electionId === el.electionId ? 'bg-gradient-to-br from-[#1d70b8]/10 to-transparent border-[#1d70b8] shadow-[0_8px_20px_rgba(0,77,40,0.15)] -translate-y-1' : 'bg-white/50 border-gray-200 hover:border-[#d4af37] hover:bg-white/80 hover:shadow-md'}`}
                   >
-                    <h3 className={`text-lg font-extrabold mb-2 transition-colors ${selectedElection?.electionId === el.electionId ? 'text-[#004D28]' : 'text-slate-800 group-hover:text-[#004D28]'}`}>{el.title}</h3>
+                    <h3 className={`text-lg font-extrabold mb-2 transition-colors ${selectedElection?.electionId === el.electionId ? 'text-[#1d70b8]' : 'text-slate-800 group-hover:text-[#1d70b8]'}`}>{el.title}</h3>
                     <p className="text-slate-500 text-xs line-clamp-2 mb-4 font-medium leading-relaxed">{el.description}</p>
-                    <span className="text-[9px] px-3 py-1 bg-gradient-to-r from-[#d4af37] to-[#f5d76e] font-bold uppercase tracking-widest rounded-md text-[#002614] shadow-sm">{el.status}</span>
+                    <span className="text-[9px] px-3 py-1 bg-gradient-to-r from-[#d4af37] to-[#f5d76e] font-bold uppercase tracking-widest rounded-md text-[#002d5c] shadow-sm">{el.status}</span>
                   </div>
                 ))}
                 {elections.length === 0 && (
@@ -130,7 +130,7 @@ export default function CandidatePortal() {
               <input
                 type="text"
                 placeholder="e.g. John Doe"
-                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none transition-all shadow-inner font-medium"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#1d70b8] focus:border-transparent outline-none transition-all shadow-inner font-medium"
                 value={form.name}
                 onChange={e => setForm({...form, name: e.target.value})}
               />
@@ -141,7 +141,7 @@ export default function CandidatePortal() {
               <input
                 type="text"
                 placeholder="e.g. Independent, Green Party"
-                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none transition-all shadow-inner font-medium"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#1d70b8] focus:border-transparent outline-none transition-all shadow-inner font-medium"
                 value={form.partyName}
                 onChange={e => setForm({...form, partyName: e.target.value})}
               />
@@ -152,7 +152,7 @@ export default function CandidatePortal() {
               <textarea
                 placeholder="Outline your vision and promises for the country..."
                 rows={4}
-                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#004D28] focus:border-transparent outline-none resize-none transition-all shadow-inner font-medium leading-relaxed"
+                className="w-full px-5 py-4 bg-white/50 border border-gray-200 text-slate-900 rounded-xl focus:ring-2 focus:ring-[#1d70b8] focus:border-transparent outline-none resize-none transition-all shadow-inner font-medium leading-relaxed"
                 value={form.proposal}
                 onChange={e => setForm({...form, proposal: e.target.value})}
               />

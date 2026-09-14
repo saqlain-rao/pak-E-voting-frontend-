@@ -86,7 +86,7 @@ export default function AdminDashboard() {
           fetchPendingKyc();
         }
       } catch (e) {
-        console.error(e);
+        localStorage.removeItem('auth_token');
       }
     }
     setLoading(false);
@@ -290,13 +290,13 @@ export default function AdminDashboard() {
     return (
       <div className="w-full bg-[#f8fafc] min-h-screen flex items-center justify-center p-6 flex-col">
         {/* Official Header Section */}
-        <div className="w-full bg-premium-green text-white py-12 relative overflow-hidden border-b-[6px] border-[#d4af37] absolute top-0 left-0 shadow-[0_10px_30px_rgba(0,38,20,0.5)]">
-          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+        <div className="w-full bg-premium-blue text-white py-12 relative overflow-hidden border-b-[6px] border-[#d4af37] absolute top-0 left-0 shadow-[0_10px_30px_rgba(0,38,20,0.5)]">
+          
           <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
             <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
               Admin Access <span className="text-gradient-gold">Required</span>
             </h1>
-            <p className="text-lg text-green-50/90 font-light tracking-wide uppercase text-sm">
+            <p className="text-lg text-blue-50/90 font-light tracking-wide uppercase text-sm">
               Secure Government Portal Area
             </p>
           </div>
@@ -305,7 +305,7 @@ export default function AdminDashboard() {
           <div className="text-5xl mb-6 bg-red-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto shadow-inner border border-red-200">
             <span className="drop-shadow-sm">🔐</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-[#004D28] mb-3">Restricted Area</h1>
+          <h1 className="text-3xl font-extrabold text-[#1d70b8] mb-3">Restricted Area</h1>
           <p className="text-slate-600 mb-8 font-medium leading-relaxed">
             Please authenticate with your official administrator credentials to proceed into the Central Command.
           </p>
@@ -324,17 +324,17 @@ export default function AdminDashboard() {
   return (
     <div className="w-full bg-[#f8fafc] min-h-screen flex flex-col">
       {/* Official Header Section */}
-      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
+      <div className="w-full bg-premium-blue text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002d5c] to-transparent opacity-80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
             Secured Admin Zone
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 drop-shadow-2xl">
-            Central Command <span className="text-gradient-gold">Dashboard</span>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 drop-shadow-2xl !text-[#d4af37]">
+            Federal Admin <span className="text-gradient-gold">Dashboard</span>
           </h1>
-          <p className="text-lg text-green-50/80 font-light max-w-2xl">
+          <p className="text-lg text-blue-50/80 font-light max-w-2xl">
             Manage Elections, Verify Identities, and Monitor Blockchain Operations securely.
           </p>
         </div>
@@ -346,7 +346,7 @@ export default function AdminDashboard() {
           {/* Left Col: Forms */}
           <div className="md:col-span-1 space-y-8 animate-float" style={{animationDuration: '8s'}}>
             <div className="glass-panel p-6 bg-white/80">
-              <h2 className="text-xl font-extrabold text-[#004D28] mb-4 flex items-center gap-2 border-b border-[#004D28]/10 pb-3">
+              <h2 className="text-xl font-extrabold text-[#1d70b8] mb-4 flex items-center gap-2 border-b border-[#1d70b8]/10 pb-3">
                 <span className="text-2xl">📝</span> Draft New Election
               </h2>
               <form onSubmit={handleCreateElection} className="flex flex-col gap-4 mt-4">
@@ -354,12 +354,12 @@ export default function AdminDashboard() {
                   required
                   type="text" 
                   placeholder="Election Title" 
-                  className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28] backdrop-blur-sm transition-all shadow-inner"
+                  className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#1d70b8] focus:ring-1 focus:ring-[#1d70b8] backdrop-blur-sm transition-all shadow-inner"
                   value={electionForm.title} onChange={e => setElectionForm({...electionForm, title: e.target.value})}
                 />
                 <textarea 
                   placeholder="Description" 
-                  className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28] h-24 resize-none backdrop-blur-sm transition-all shadow-inner"
+                  className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-slate-900 focus:outline-none focus:border-[#1d70b8] focus:ring-1 focus:ring-[#1d70b8] h-24 resize-none backdrop-blur-sm transition-all shadow-inner"
                   value={electionForm.description} onChange={e => setElectionForm({...electionForm, description: e.target.value})}
                 />
                 <div className="grid grid-cols-2 gap-4">
@@ -367,7 +367,7 @@ export default function AdminDashboard() {
                     <label className="text-[10px] font-bold text-slate-500 mb-1 block uppercase tracking-wider">Start Time</label>
                     <input 
                       required type="datetime-local" 
-                      className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28] shadow-inner"
+                      className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-[#1d70b8] focus:ring-1 focus:ring-[#1d70b8] shadow-inner"
                       value={electionForm.startTime} onChange={e => setElectionForm({...electionForm, startTime: e.target.value})}
                     />
                   </div>
@@ -375,7 +375,7 @@ export default function AdminDashboard() {
                     <label className="text-[10px] font-bold text-slate-500 mb-1 block uppercase tracking-wider">Duration (Min)</label>
                     <input 
                       required type="number" min="1"
-                      className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-[#004D28] focus:ring-1 focus:ring-[#004D28] shadow-inner"
+                      className="w-full bg-white/50 border border-gray-200 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-[#1d70b8] focus:ring-1 focus:ring-[#1d70b8] shadow-inner"
                       value={electionForm.durationMinutes} onChange={e => setElectionForm({...electionForm, durationMinutes: Number(e.target.value)})}
                     />
                   </div>
@@ -414,8 +414,8 @@ export default function AdminDashboard() {
               
             {/* Pending KYC Table */}
             <div className="glass-panel p-6 bg-white/80 border-t-4 border-t-[#d4af37]">
-              <div className="flex justify-between items-center mb-6 border-b border-[#004D28]/10 pb-4">
-                <h2 className="text-xl font-extrabold text-[#004D28] flex items-center gap-2">
+              <div className="flex justify-between items-center mb-6 border-b border-[#1d70b8]/10 pb-4">
+                <h2 className="text-xl font-extrabold text-[#1d70b8] flex items-center gap-2">
                   <span className="text-2xl drop-shadow-sm">🛡️</span> Pending KYC Requests
                 </h2>
                 <button onClick={fetchPendingKyc} className="px-4 py-1.5 bg-[#d4af37]/10 hover:bg-[#d4af37]/20 rounded-lg text-[#a68621] text-xs font-bold transition-all shadow-sm border border-[#d4af37]/20 flex items-center gap-1" title="Refresh">
@@ -428,7 +428,7 @@ export default function AdminDashboard() {
                       <div key={user.walletAddress} className="bg-white/50 border border-[#d4af37]/30 rounded-xl p-4 flex justify-between items-center hover:bg-white/80 transition-all shadow-sm hover:shadow-md">
                           <div>
                               <div className="flex gap-2 items-center mb-1">
-                                  <h3 className="font-extrabold text-[#004D28] text-base">{user.name}</h3>
+                                  <h3 className="font-extrabold text-[#1d70b8] text-base">{user.name}</h3>
                                   <span className="text-[9px] px-2 py-0.5 rounded-full font-bold bg-[#d4af37]/20 text-[#a68621] uppercase tracking-wider border border-[#d4af37]/30">{user.role}</span>
                               </div>
                               <p className="text-[11px] font-mono text-slate-500 mb-1">{user.walletAddress}</p>
@@ -454,23 +454,23 @@ export default function AdminDashboard() {
               </div>
             </div>
 
-            <div className="glass-panel p-6 bg-white/80 border-t-4 border-t-[#004D28]">
-              <div className="flex justify-between items-center mb-6 border-b border-[#004D28]/10 pb-4">
-                <h2 className="text-xl font-extrabold text-[#004D28] flex items-center gap-2">
+            <div className="glass-panel p-6 bg-white/80 border-t-4 border-t-[#1d70b8]">
+              <div className="flex justify-between items-center mb-6 border-b border-[#1d70b8]/10 pb-4">
+                <h2 className="text-xl font-extrabold text-[#1d70b8] flex items-center gap-2">
                   <span className="text-2xl drop-shadow-sm">⚙️</span> Manage Elections
                 </h2>
-                <button onClick={fetchElections} className="px-4 py-1.5 bg-[#004D28]/10 hover:bg-[#004D28]/20 rounded-lg text-[#004D28] text-xs font-bold transition-all shadow-sm border border-[#004D28]/20 flex items-center gap-1" title="Refresh">
+                <button onClick={fetchElections} className="px-4 py-1.5 bg-[#1d70b8]/10 hover:bg-[#1d70b8]/20 rounded-lg text-[#1d70b8] text-xs font-bold transition-all shadow-sm border border-[#1d70b8]/20 flex items-center gap-1" title="Refresh">
                   <span>↻</span> Refresh
                 </button>
               </div>
               
               <div className="grid sm:grid-cols-2 gap-5">
                 {elections.map((el) => (
-                  <div key={el.electionId} className="bg-white/60 border border-[#004D28]/20 hover:border-[#004D28]/50 hover:shadow-[0_8px_20px_rgba(0,77,40,0.1)] rounded-xl p-5 flex flex-col justify-between transition-all backdrop-blur-sm group">
+                  <div key={el.electionId} className="bg-white/60 border border-[#1d70b8]/20 hover:border-[#1d70b8]/50 hover:shadow-[0_8px_20px_rgba(0,77,40,0.1)] rounded-xl p-5 flex flex-col justify-between transition-all backdrop-blur-sm group">
                     <div>
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="font-extrabold text-[#004D28]">{el.title}</h3>
-                        <span className={el.status === 'Active' ? 'text-[9px] px-2 py-1 rounded-md font-bold uppercase tracking-widest bg-green-100 text-green-700 border border-green-200 shadow-inner' : 'text-[9px] px-2 py-1 rounded-md font-bold uppercase tracking-widest bg-yellow-100 text-yellow-700 border border-yellow-200 shadow-inner'}>{el.status}</span>
+                        <h3 className="font-extrabold text-[#1d70b8]">{el.title}</h3>
+                        <span className={el.status === 'Active' ? 'text-[9px] px-2 py-1 rounded-md font-bold uppercase tracking-widest bg-blue-100 text-blue-700 border border-blue-200 shadow-inner' : 'text-[9px] px-2 py-1 rounded-md font-bold uppercase tracking-widest bg-yellow-100 text-yellow-700 border border-yellow-200 shadow-inner'}>{el.status}</span>
                       </div>
                       {el.description && <p className="text-slate-500 font-medium text-xs mb-3 line-clamp-2 h-8">{el.description}</p>}
                       
@@ -489,14 +489,14 @@ export default function AdminDashboard() {
                           {el.status === 'Draft' && (
                             <button 
                               onClick={() => handleStartElection(el.contractAddress, el.electionId)}
-                              className="w-full py-2.5 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white text-xs font-bold rounded-lg shadow-sm transition-all uppercase tracking-widest"
+                              className="w-full py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white text-xs font-bold rounded-lg shadow-sm transition-all uppercase tracking-widest"
                             >
                               Start Election
                             </button>
                           )}
                           {el.status === 'Active' && (
                             <div className="flex flex-col gap-2">
-                              <span className="text-[9px] font-bold text-green-700 bg-green-100/80 px-2 py-1.5 rounded-md text-center uppercase tracking-widest border border-green-200 animate-pulse">● LIVE: VOTING OPEN</span>
+                              <span className="text-[9px] font-bold text-blue-700 bg-blue-100/80 px-2 py-1.5 rounded-md text-center uppercase tracking-widest border border-blue-200 animate-pulse">● LIVE: VOTING OPEN</span>
                               <button 
                                 onClick={() => handleResolveElection(el.contractAddress, el.electionId)}
                                 disabled={isPending}
@@ -521,7 +521,7 @@ export default function AdminDashboard() {
                 ))}
                 
                 {elections.length === 0 && (
-                  <div className="col-span-2 text-center p-8 text-slate-400 font-medium border-2 border-dashed border-[#004D28]/20 rounded-xl bg-white/30 backdrop-blur-sm">
+                  <div className="col-span-2 text-center p-8 text-slate-400 font-medium border-2 border-dashed border-[#1d70b8]/20 rounded-xl bg-white/30 backdrop-blur-sm">
                     No elections found. Draft one to get started.
                   </div>
                 )}

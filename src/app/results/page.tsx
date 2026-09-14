@@ -149,7 +149,7 @@ export default function ResultsDashboard() {
 
   const getStateBadge = () => {
     if (onChainState === 0) return <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-md text-xs font-bold uppercase">Draft</span>;
-    if (onChainState === 1) return <span className="bg-green-100 text-green-800 px-3 py-1 rounded-md text-xs font-bold uppercase">Active Voting</span>;
+    if (onChainState === 1) return <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-md text-xs font-bold uppercase">Active Voting</span>;
     if (onChainState === 2) return <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-md text-xs font-bold uppercase">Completed</span>;
     if (onChainState === 3) return <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-md text-xs font-bold uppercase">Draw / Tied</span>;
     return <span className="bg-red-100 text-red-800 px-3 py-1 rounded-md text-xs font-bold uppercase">Cancelled</span>;
@@ -158,17 +158,17 @@ export default function ResultsDashboard() {
   return (
     <div className="w-full bg-[#f8fafc] min-h-screen flex flex-col">
       {/* Official Header Section */}
-      <div className="w-full bg-premium-green text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
-        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at center, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#002614] to-transparent opacity-80"></div>
+      <div className="w-full bg-premium-blue text-white pt-32 pb-16 relative overflow-hidden border-b-[6px] border-[#d4af37] shadow-[0_20px_50px_rgba(0,38,20,0.5)]">
+        
+        <div className="absolute inset-0 bg-gradient-to-t from-[#002d5c] to-transparent opacity-80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 text-[#d4af37] text-[10px] font-bold tracking-[0.25em] uppercase backdrop-blur-md">
             National E-Voting
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
-            Public <span className="text-gradient-gold">Audit Ledger</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 drop-shadow-2xl !text-[#d4af37]">
+            Live <span className="text-gradient-gold">Results</span> Ledger
           </h1>
-          <p className="text-lg text-green-50/80 font-light max-w-2xl mx-auto">
+          <p className="text-lg text-blue-50/80 font-light max-w-2xl mx-auto">
             Cryptographically verified election results directly from the blockchain. Transparent, immutable, and secure.
           </p>
         </div>
@@ -181,13 +181,13 @@ export default function ResultsDashboard() {
               <div 
                 key={el.electionId} 
                 onClick={() => setSelectedElection(el)} 
-                className="cursor-pointer glass-panel bg-white/80 border-t-[6px] border-[#004D28] p-8 shadow-lg hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,77,40,0.3)] transition-all flex flex-col justify-between h-56 group"
+                className="cursor-pointer glass-panel bg-white/80 border-t-[6px] border-[#1d70b8] p-8 shadow-lg hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(0,77,40,0.3)] transition-all flex flex-col justify-between h-56 group"
               >
                 <div>
-                  <h3 className="text-2xl font-extrabold text-[#004D28] mb-3 line-clamp-1 group-hover:text-[#002614] transition-colors">{el.title}</h3>
+                  <h3 className="text-2xl font-extrabold text-[#1d70b8] mb-3 line-clamp-1 group-hover:text-[#002d5c] transition-colors">{el.title}</h3>
                   <p className="text-slate-600 font-medium text-sm line-clamp-2 leading-relaxed">{el.description}</p>
                 </div>
-                <div className="flex justify-between items-center mt-6 border-t border-[#004D28]/10 pt-5">
+                <div className="flex justify-between items-center mt-6 border-t border-[#1d70b8]/10 pt-5">
                   <span className="text-[10px] text-slate-400 font-mono font-bold uppercase bg-slate-100 px-3 py-1.5 rounded-md">ID: {el.electionId}</span>
                   <span className="text-[#d4af37] text-[11px] font-extrabold uppercase tracking-widest flex items-center gap-1 group-hover:gap-2 transition-all">View Ledger <span className="text-lg leading-none">→</span></span>
                 </div>
@@ -200,14 +200,14 @@ export default function ResultsDashboard() {
             
             {/* Main Dashboard Panel */}
             <div className="lg:col-span-2 space-y-6">
-              <button onClick={() => setSelectedElection(null)} className="text-[#004D28] hover:text-[#002614] text-xs font-bold uppercase tracking-wider flex items-center gap-2 mb-2 bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#004D28]/10 w-fit transition-all hover:bg-white hover:-translate-x-1">
+              <button onClick={() => setSelectedElection(null)} className="text-[#1d70b8] hover:text-[#002d5c] text-xs font-bold uppercase tracking-wider flex items-center gap-2 mb-2 bg-white/50 backdrop-blur-sm px-5 py-2.5 rounded-full shadow-sm border border-[#1d70b8]/10 w-fit transition-all hover:bg-white hover:-translate-x-1">
                 ← Back to Ledgers
               </button>
 
               <div className="glass-panel bg-white/90 border-l-[6px] border-l-[#d4af37] p-10 shadow-2xl backdrop-blur-xl">
-                <div className="flex justify-between items-start mb-8 pb-6 border-b border-[#004D28]/10">
+                <div className="flex justify-between items-start mb-8 pb-6 border-b border-[#1d70b8]/10">
                   <div>
-                    <h2 className="text-4xl font-extrabold mb-3 text-[#004D28] drop-shadow-sm">{selectedElection.title}</h2>
+                    <h2 className="text-4xl font-extrabold mb-3 text-[#1d70b8] drop-shadow-sm">{selectedElection.title}</h2>
                     <div className="inline-block bg-slate-100 px-4 py-2 rounded-lg border border-slate-200 shadow-inner">
                         <p className="text-slate-500 font-medium text-[11px] break-all font-mono"><span className="font-bold text-slate-400 uppercase tracking-widest">Contract:</span> {selectedElection.contractAddress}</p>
                     </div>
@@ -215,10 +215,10 @@ export default function ResultsDashboard() {
                   <div className="flex flex-col items-end gap-3">
                     {getStateBadge()}
                     {onChainState === 1 && (
-                      <div className="flex items-center gap-3 bg-gradient-to-r from-green-50 to-white px-5 py-3 rounded-xl border border-green-200 shadow-sm relative overflow-hidden">
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500 animate-pulse"></div>
-                        <span className="text-[9px] font-bold text-green-700 uppercase tracking-widest leading-none">Time Remaining</span>
-                        <div className="text-3xl font-mono font-black text-[#004D28] drop-shadow-sm leading-none tabular-nums">
+                      <div className="flex items-center gap-3 bg-gradient-to-r from-blue-50 to-white px-5 py-3 rounded-xl border border-blue-200 shadow-sm relative overflow-hidden">
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 animate-pulse"></div>
+                        <span className="text-[9px] font-bold text-blue-700 uppercase tracking-widest leading-none">Time Remaining</span>
+                        <div className="text-3xl font-mono font-black text-[#1d70b8] drop-shadow-sm leading-none tabular-nums">
                           {timeLeft}
                         </div>
                       </div>
@@ -232,7 +232,7 @@ export default function ResultsDashboard() {
                     <div className="text-6xl drop-shadow-md relative z-10">🏆</div>
                     <div className="relative z-10">
                       <h3 className="text-sm text-[#a68621] font-extrabold mb-2 uppercase tracking-[0.2em]">Official Verified Winner</h3>
-                      <p className="text-4xl font-black text-[#002614] drop-shadow-sm">
+                      <p className="text-4xl font-black text-[#002d5c] drop-shadow-sm">
                         {hydratedCandidates.find(c => c.candidateId === Number(onChainWinnerId))?.partyName || `Candidate #${Number(onChainWinnerId)}`}
                       </p>
                     </div>
@@ -249,7 +249,7 @@ export default function ResultsDashboard() {
                   </motion.div>
                 )}
 
-                <h3 className="text-lg font-extrabold text-[#004D28] mb-6 flex items-center gap-3 uppercase tracking-widest">
+                <h3 className="text-lg font-extrabold text-[#1d70b8] mb-6 flex items-center gap-3 uppercase tracking-widest">
                   <span className="text-[#d4af37] text-2xl drop-shadow-sm">❖</span> Live Cryptographic Tally
                 </h3>
                 
@@ -267,14 +267,14 @@ export default function ResultsDashboard() {
                       >
                         {/* Progress Bar Background */}
                         <motion.div 
-                          className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-[#004D28]/10 to-transparent z-0 border-r border-[#004D28]/20"
+                          className="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-[#1d70b8]/10 to-transparent z-0 border-r border-[#1d70b8]/20"
                           initial={{ width: 0 }}
                           animate={{ width: `${Math.min(100, (c.liveVotes / (hydratedCandidates[0]?.liveVotes || 1)) * 100)}%` }}
                           transition={{ duration: 1, type: 'spring' }}
                         />
                         
                         <div className="relative z-10 flex items-center gap-5">
-                          <span className={`w-10 h-10 rounded-full flex items-center justify-center font-black text-lg shadow-sm ${idx === 0 && c.liveVotes > 0 ? 'bg-gradient-to-br from-[#d4af37] to-[#f5d76e] text-[#002614] border border-[#d4af37]' : 'bg-gray-100 text-gray-400 border border-gray-200'}`}>
+                          <span className={`w-10 h-10 rounded-full flex items-center justify-center font-black text-lg shadow-sm ${idx === 0 && c.liveVotes > 0 ? 'bg-gradient-to-br from-[#d4af37] to-[#f5d76e] text-[#002d5c] border border-[#d4af37]' : 'bg-gray-100 text-gray-400 border border-gray-200'}`}>
                             {idx + 1}
                           </span>
                           <div>
@@ -287,7 +287,7 @@ export default function ResultsDashboard() {
                           <motion.span 
                             key={c.liveVotes}
                             initial={{ scale: 1.5, color: '#d4af37' }}
-                            animate={{ scale: 1, color: '#004D28' }}
+                            animate={{ scale: 1, color: '#1d70b8' }}
                             className="text-4xl font-black tabular-nums drop-shadow-sm"
                           >
                             {c.liveVotes}
@@ -303,11 +303,11 @@ export default function ResultsDashboard() {
             </div>
 
             {/* Audit Trail Sidebar */}
-            <div className="glass-panel bg-white/95 border-t-[6px] border-[#004D28] rounded-2xl p-6 shadow-2xl h-[800px] flex flex-col relative overflow-hidden backdrop-blur-xl">
+            <div className="glass-panel bg-white/95 border-t-[6px] border-[#1d70b8] rounded-2xl p-6 shadow-2xl h-[800px] flex flex-col relative overflow-hidden backdrop-blur-xl">
               <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] pointer-events-none"></div>
               
-              <div className="relative z-10 mb-6 pb-6 border-b border-[#004D28]/10">
-                  <h3 className="text-lg font-extrabold text-[#004D28] mb-2 flex items-center gap-2 uppercase tracking-widest">
+              <div className="relative z-10 mb-6 pb-6 border-b border-[#1d70b8]/10">
+                  <h3 className="text-lg font-extrabold text-[#1d70b8] mb-2 flex items-center gap-2 uppercase tracking-widest">
                     <span className="text-[#d4af37] text-xl drop-shadow-sm">❖</span> Audit Trail
                   </h3>
                   <p className="text-[11px] font-medium text-slate-500 leading-relaxed">
@@ -324,14 +324,14 @@ export default function ResultsDashboard() {
                     key={i} 
                     className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:border-[#d4af37]/50 transition-all group relative overflow-hidden"
                   >
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#004D28] group-hover:bg-[#d4af37] transition-colors"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#1d70b8] group-hover:bg-[#d4af37] transition-colors"></div>
                     <div className="flex justify-between items-center mb-3">
-                      <span className="text-[9px] font-black uppercase tracking-widest text-[#004D28] bg-[#004D28]/10 px-2 py-1 rounded-sm border border-[#004D28]/20">VoteCast</span>
+                      <span className="text-[9px] font-black uppercase tracking-widest text-[#1d70b8] bg-[#1d70b8]/10 px-2 py-1 rounded-sm border border-[#1d70b8]/20">VoteCast</span>
                       <a 
                         href={`https://sepolia.etherscan.io/tx/${log.transactionHash}`} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-[10px] font-bold text-[#d4af37] hover:text-[#004D28] underline decoration-[#d4af37]/30 underline-offset-2 flex items-center gap-1 transition-colors"
+                        className="text-[10px] font-bold text-[#d4af37] hover:text-[#1d70b8] underline decoration-[#d4af37]/30 underline-offset-2 flex items-center gap-1 transition-colors"
                       >
                         TxHash <span className="text-xs">↗</span>
                       </a>
@@ -342,7 +342,7 @@ export default function ResultsDashboard() {
                     </p>
                     <p className="text-[11px] text-slate-600 font-mono bg-slate-50 p-1.5 rounded border border-slate-100">
                       <span className="font-bold text-slate-400 uppercase tracking-widest mr-2">Cand ID:</span> 
-                      <span className="text-[#004D28] font-bold">{Number(log.args.candidateId)}</span>
+                      <span className="text-[#1d70b8] font-bold">{Number(log.args.candidateId)}</span>
                     </p>
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400 mt-3 text-right">Block: {Number(log.blockNumber)}</p>
                   </motion.div>

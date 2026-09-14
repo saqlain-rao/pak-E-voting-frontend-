@@ -26,10 +26,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#F4F9F6] text-slate-900" style={{ backgroundImage: "radial-gradient(#11574022 1px, transparent 1px)", backgroundSize: "32px 32px" }}>
+      <body className="min-h-full flex flex-col bg-[#F4F9F6] text-slate-900">
         <Providers>
           <Navbar />
-          <Toaster position="top-right" toastOptions={{ style: { background: '#fff', border: '1px solid #115740', color: '#115740', fontWeight: 'bold' } }} />
+          <Toaster position="top-right" toastOptions={{ style: { background: '#fff', border: '1px solid #1d70b8', color: '#1d70b8', fontWeight: 'bold' } }} />
           <main className="flex-1 relative">
             {children}
           </main>

@@ -23,9 +23,9 @@
   /* NADRA Inspired Premium Palette */
   --background: #f8fafc;
   --foreground: #0f172a;
-  --primary-green: #004d28;
-  --primary-green-light: #115740;
-  --primary-green-dark: #002614;
+  --primary-blue: #0f4c81; /* Classic Blue */
+  --primary-blue-light: #1d70b8; 
+  --primary-blue-dark: #002d5c;
   --accent-gold: #d4af37;
   --accent-gold-light: #f5d76e;
 }
@@ -40,7 +40,7 @@ body {
 
 /* Premium Typography */
 h1, h2, h3, h4, h5, h6 {
-  color: var(--primary-green);
+  color: var(--primary-blue);
   letter-spacing: -0.02em;
 }
 
@@ -50,12 +50,12 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(0, 77, 40, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(30, 58, 138, 0.15);
   border-radius: 1rem;
 }
 
 .glass-panel-dark {
-  background: rgba(0, 38, 20, 0.7);
+  background: rgba(23, 37, 84, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(212, 175, 55, 0.2);
@@ -65,8 +65,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Rich Gradients */
-.bg-premium-green {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+.bg-premium-blue {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
 }
 
 .text-gradient-gold {
@@ -85,15 +85,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-premium {
-  background: linear-gradient(to right, var(--primary-green), var(--primary-green-light));
+  background: linear-gradient(to right, var(--primary-blue), var(--primary-blue-light));
   color: white;
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 15px rgba(0, 77, 40, 0.2);
+  box-shadow: 0 4px 15px rgba(30, 58, 138, 0.2);
 }
 
 .btn-premium:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 77, 40, 0.4);
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.4);
   border-color: rgba(212, 175, 55, 0.5);
 }

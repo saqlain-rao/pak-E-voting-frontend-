@@ -73,12 +73,12 @@ export function Navbar() {
   const isAdmin = address?.toLowerCase() === '0x449F48A20CF8c3E9B738D9c88942a3E6bCe1aA95'.toLowerCase();
 
   return (
-    <nav className="absolute top-0 left-0 w-full bg-[#002614]/95 backdrop-blur-2xl border-b border-[#d4af37]/30 flex items-center justify-between px-6 md:px-12 py-4 shadow-[0_10px_30px_rgba(0,38,20,0.5)] z-50 transition-all duration-300">
+    <nav className="absolute top-0 left-0 w-full bg-[#002d5c]/95 backdrop-blur-2xl border-b border-[#d4af37]/30 flex items-center justify-between px-6 md:px-12 py-4 shadow-[0_10px_30px_rgba(0,38,20,0.5)] z-50 transition-all duration-300">
       <div className="flex items-center gap-8">
         <a href="/" className="flex flex-col cursor-pointer group">
           <span className="text-2xl font-extrabold tracking-widest text-white uppercase flex items-center gap-3">
             <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f5d76e] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-transform duration-300">
-              <span className="w-4 h-4 text-[#002614] flex items-center justify-center -ml-0.5 mt-0.5">☪</span>
+              <span className="w-4 h-4 text-[#002d5c] flex items-center justify-center -ml-0.5 mt-0.5">☪</span>
             </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 group-hover:to-white transition-all">PAK E-VOTING</span>
           </span>
