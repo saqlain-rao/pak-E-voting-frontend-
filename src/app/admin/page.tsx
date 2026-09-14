@@ -340,7 +340,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 max-w-7xl w-full mx-auto p-6 relative z-10 -mt-8 pb-20">
+      <div className="flex-1 max-w-7xl w-full mx-auto p-6 relative z-10 mt-10 pb-20">
         <div className="grid md:grid-cols-3 gap-8">
           
           {/* Left Col: Forms */}

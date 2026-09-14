@@ -96,7 +96,7 @@ export default function CandidatePortal() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10 -mt-10">
+      <div className="max-w-4xl mx-auto p-6 py-12 relative z-10 mt-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

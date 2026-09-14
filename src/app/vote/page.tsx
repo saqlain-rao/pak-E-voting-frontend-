@@ -183,7 +183,7 @@ export default function VotePortal() {
         </div>
       </div>
 
-      <div className="max-w-5xl w-full mx-auto p-6 relative z-10 -mt-10 pb-20">
+      <div className="max-w-5xl w-full mx-auto p-6 relative z-10 mt-10 pb-20">
         {!selectedElection ? (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-2 gap-8">
             

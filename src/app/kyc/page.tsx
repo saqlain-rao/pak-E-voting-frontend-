@@ -229,7 +229,7 @@ export default function KycPage() {
         </div>
       </div>
 
-      <div className="flex-1 max-w-2xl w-full mx-auto p-6 relative z-10 -mt-10 pb-20">
+      <div className="flex-1 max-w-2xl w-full mx-auto p-6 relative z-10 mt-10 pb-20">
         {/* Step Indicator */}
         <div className="flex items-center justify-between mb-10 relative px-4">
           <div className="absolute left-10 right-10 top-5 h-[2px] bg-gray-200/50 -z-10" />

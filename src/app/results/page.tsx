@@ -174,7 +174,7 @@ export default function ResultsDashboard() {
         </div>
       </div>
 
-      <div className="flex-1 max-w-7xl w-full mx-auto p-6 relative z-10 -mt-10 pb-20">
+      <div className="flex-1 max-w-7xl w-full mx-auto p-6 relative z-10 mt-10 pb-20">
         {!selectedElection ? (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="grid md:grid-cols-3 gap-8">
             {elections.map((el) => (
